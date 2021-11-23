@@ -15,9 +15,9 @@ import lombok.Setter;
 @Setter
 public class ReponseUtilisateurQuestionPk implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idUtilisateur")
+    @JoinColumn(name = "id_utilisateur")
     private Utilisateur utilisateur;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idQuestion")
+    @JoinColumn(name = "id_question")
     private Question question;
 }

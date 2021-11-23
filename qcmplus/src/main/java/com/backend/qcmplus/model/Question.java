@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "Question")
+@Table(name = "question")
 @Setter
 @Getter
 @NoArgsConstructor
@@ -22,7 +22,7 @@ public class Question implements Serializable {
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Resultat> resultat;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idQuestionnaire")
+    @JoinColumn(name = "id_questionnaire")
     private Questionnaire questionnaire;
 
     public Question(String intitule, List<Resultat> resultat, Questionnaire questionnaire) {

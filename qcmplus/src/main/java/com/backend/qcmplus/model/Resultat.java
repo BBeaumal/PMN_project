@@ -15,22 +15,22 @@ import lombok.Setter;
 public class Resultat implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int idResultat;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idQuestion")
+    @JoinColumn(name = "id_question")
     private Question question;
     private String libelle;
     private boolean isCorrect;
 
-    public Resultat(int id, String libelle, boolean isCorrect) {
-        this.id = id;
+    public Resultat(int idResultat, String libelle, boolean isCorrect) {
+        this.idResultat = idResultat;
         this.libelle = libelle;
         this.isCorrect = isCorrect;
     }
 
     @Override
     public String toString() {
-        return "Resultat [id=" + id + ", iscorrect=" + isCorrect + ", libelle=" + libelle + "]";
+        return "Resultat [idResultat=" + idResultat + ", iscorrect=" + isCorrect + ", libelle=" + libelle + "]";
     }
 
 }
