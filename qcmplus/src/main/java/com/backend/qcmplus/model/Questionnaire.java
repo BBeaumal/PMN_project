@@ -5,6 +5,8 @@ import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
@@ -13,30 +15,21 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
-public class Questionnaire {
-
-    private int id;
-    private String nom;
+public class Questionnaire implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int idQuestionnaire;
+    private String nomQuestionnaire;
     private String auteur;
-    private Date date;
-    private List<Question> listequestion;
-    private int score;
+    private Date dateCreation;
+    @OneToMany(mappedBy = "idQuestion", cascade = CascadeType.ALL)
+    private List<Question> listeQuestion;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Questionnaire(int id, String nom, String auteur, Date date, List<Question> listequestion, int score) {
-        this.id = id;
-        this.nom = nom;
+    public Questionnaire(String nom, String auteur, Date date, List<Question> listequestion) {
+        this.nomQuestionnaire = nom;
         this.auteur = auteur;
-        this.date = date;
-        this.listequestion = listequestion;
-        this.score = score;
+        this.dateCreation = date;
+        this.listeQuestion = listequestion;
     }
 
 }

@@ -1,47 +1,33 @@
 package com.backend.qcmplus.model;
 
 import javax.persistence.*;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "Question")
-public class Question {
-
-    private int id;
-    private String intitule;
-    private List<Resultat> resultat;
-
-
-    public Question(int id, String intitule,
-                    List<Resultat> resultat) {
-        this.id = id;
-        this.intitule = intitule;
-        this.resultat = resultat;
-    }
-
-    public Question() {
-    }
-
-
+@Setter
+@Getter
+@NoArgsConstructor
+public class Question implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getId() {
-        return id;
-    }
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int idQuestion;
+    private String intitule;
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    private List<Resultat> resultat;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idQuestionnaire")
+    private Questionnaire questionnaire;
 
-    public String getIntitule() {
-        return intitule;
-    }
-
-    public void setIntitule(String intitule) {
+    public Question(String intitule, List<Resultat> resultat, Questionnaire questionnaire) {
         this.intitule = intitule;
-    }
-
-    public List<Resultat> getResultat() {
-        return resultat;
-    }
-
-    public void setResultat(List<Resultat> resultat) {
         this.resultat = resultat;
+        this.questionnaire = questionnaire;
     }
 }
