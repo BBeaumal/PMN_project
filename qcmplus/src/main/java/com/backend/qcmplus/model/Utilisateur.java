@@ -2,11 +2,17 @@ package com.backend.qcmplus.model;
 
 import javax.persistence.*;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "Utilisateur")
-@Getter @Setter @NoArgsConstructor
-public class Utilisateur
-{
+@Getter
+@Setter
+@NoArgsConstructor
+public class Utilisateur {
+    @Id
     private int id;
     private String nom;
     private String prenom;
@@ -16,9 +22,8 @@ public class Utilisateur
     private String societe;
     private boolean isadmin;
 
-
-    public Utilisateur(int id, String nom, String prenom, String mail,
-                       String login, String password, String societe, Boolean isadmin) {
+    public Utilisateur(int id, String nom, String prenom, String mail, String login, String password, String societe,
+            Boolean isadmin) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -31,15 +36,8 @@ public class Utilisateur
 
     @Override
     public String toString() {
-        return "Utilisateur{" +
-                "id=" + id +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", mail='" + mail + '\'' +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", societe='" + societe + '\'' +
-                ", isadmin=" + isadmin +
-                '}';
+        return "Utilisateur{" + "id=" + id + ", nom='" + nom + '\'' + ", prenom='" + prenom + '\'' + ", mail='" + mail
+                + '\'' + ", login='" + login + '\'' + ", password='" + password + '\'' + ", societe='" + societe + '\''
+                + ", isadmin=" + isadmin + '}';
     }
 }
