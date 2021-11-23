@@ -16,13 +16,20 @@ import lombok.Setter;
 public class Utilisateur implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int idUtilisateur;
+    private Long idUtilisateur;
+
     private String nom;
+
     private String prenom;
+
     private String mail;
+
     private String login;
+
     private String password;
+
     private String societe;
+
     private boolean isadmin;
 
     @Override

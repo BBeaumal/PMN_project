@@ -18,10 +18,7 @@ public class ReponseUtilisateurQuestion implements Serializable {
 
     @EmbeddedId
     private ReponseUtilisateurQuestionPk linkPk = new ReponseUtilisateurQuestionPk();
-    private int reponse;
 
-    public ReponseUtilisateurQuestion(int reponse) {
-        this.reponse = reponse;
-    }
+    private int reponse;
 
 }

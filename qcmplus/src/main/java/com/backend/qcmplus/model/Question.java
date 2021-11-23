@@ -17,17 +17,15 @@ import java.util.List;
 public class Question implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int idQuestion;
+    private Long idQuestion;
+
     private String intitule;
+
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Resultat> resultat;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_questionnaire")
     private Questionnaire questionnaire;
 
-    public Question(String intitule, List<Resultat> resultat, Questionnaire questionnaire) {
-        this.intitule = intitule;
-        this.resultat = resultat;
-        this.questionnaire = questionnaire;
-    }
 }

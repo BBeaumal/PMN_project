@@ -17,6 +17,7 @@ public class ReponseUtilisateurQuestionPk implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_utilisateur")
     private Utilisateur utilisateur;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_question")
     private Question question;
