@@ -5,9 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.backend.qcmplus.model.Utilisateur;
-import com.backend.qcmplus.repository.UtilisateurRepository;
+import com.backend.qcmplus.service.UtilisateurService;
 import com.backend.qcmplus.utils.UserNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,12 +25,12 @@ import reactor.core.publisher.Mono;
 public class QcmController {
 
     @Autowired
-    private UtilisateurRepository repository;
+    private UtilisateurService utilisateurService;
 
     // Find
     @GetMapping("/users")
     Mono<List<Utilisateur>> findAll() {
-        return Mono.just(repository.findAll());
+        return Mono.just(utilisateurService.listAllUser());
     }
 
     // Save
@@ -40,13 +39,13 @@ public class QcmController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/users")
     Mono<Utilisateur> newBook(@RequestBody Utilisateur newUser) {
-        return Mono.just(repository.save(newUser));
+        return Mono.just(utilisateurService.saveUser(newUser));
     }
 
     // Find
     @GetMapping("/users/{id}")
     Mono<Utilisateur> findOne(@PathVariable Long id) throws UserNotFoundException {
-        Optional<Utilisateur> foundUser = repository.findById(id);
+        Optional<Utilisateur> foundUser = utilisateurService.getUtilisateur(id);
         if (foundUser.isEmpty())
             throw new UserNotFoundException(id);
         return Mono.just(foundUser.get());
@@ -55,7 +54,7 @@ public class QcmController {
     // Save or update
     @PutMapping("/users/{id}")
     Mono<Utilisateur> saveOrUpdate(@RequestBody Utilisateur newUser, @PathVariable Long id) {
-        Optional<Utilisateur> foundUser = repository.findById(id);
+        Optional<Utilisateur> foundUser = utilisateurService.getUtilisateur(id);
 
         return foundUser.map(x -> {
             x.setLogin(newUser.getLogin());
@@ -65,10 +64,10 @@ public class QcmController {
             x.setPrenom(newUser.getPrenom());
             x.setSociete(newUser.getSociete());
 
-            return Mono.just(repository.save(x));
+            return Mono.just(utilisateurService.saveUser(x));
         }).orElseGet(() -> {
             newUser.setIdUtilisateur(id);
-            return Mono.just(repository.save(newUser));
+            return Mono.just(utilisateurService.saveUser(newUser));
         });
     }
 
@@ -95,7 +94,7 @@ public class QcmController {
 
     @DeleteMapping("/users/{id}")
     void deleteBook(@PathVariable Long id) {
-        repository.deleteById(id);
+        utilisateurService.deleteUtilisateur(id);
     }
 
 }
