@@ -8,15 +8,15 @@
         <!-- Tabs Titles -->
 
         <!-- Login Form -->
-        <form>
+        <form action="login" method="get">
             <div>
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="Login">
+                <input type="text" id="login" class="fadeIn second" name="username" [(ngModel)]="username" placeholder="Login">
             </div>
             <div>
-                <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password">
+                <input type="password" id="password" class="fadeIn third" name="password" [(ngModel)]="password" placeholder="Password">
             </div>
             <div>
-                <input type="submit" class="fadeIn fourth" value="Log In">
+                <input type="submit" class="fadeIn fourth" value="Log In" (click)="login()">
             </div>
         </form>
 
