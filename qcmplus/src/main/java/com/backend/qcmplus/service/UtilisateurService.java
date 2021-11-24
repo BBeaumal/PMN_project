@@ -24,11 +24,11 @@ public class UtilisateurService {
         userRepository.save(user);
     }
 
-    public Optional<Utilisateur> getUtilisateur(Integer id) {
+    public Optional<Utilisateur> getUtilisateur(Long id) {
         return userRepository.findById(id);
     }
 
-    public void deleteUtilisateur(Integer id) {
+    public void deleteUtilisateur(Long id) {
         userRepository.deleteById(id);
     }
 }

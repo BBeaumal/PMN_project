@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
+import reactor.core.publisher.Mono;
 //import org.springframework.util.StringUtils;
 
 @RestController
@@ -29,8 +30,8 @@ public class QcmController {
 
     // Find
     @GetMapping("/users")
-    List<Utilisateur> findAll() {
-        return repository.findAll();
+    Mono<List<Utilisateur>> findAll() {
+        return Mono.just(repository.findAll());
     }
 
     // Save
@@ -38,23 +39,23 @@ public class QcmController {
     // @ResponseStatus(HttpStatus.CREATED)
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/users")
-    Utilisateur newBook(@RequestBody Utilisateur newUser) {
-        return repository.save(newUser);
+    Mono<Utilisateur> newBook(@RequestBody Utilisateur newUser) {
+        return Mono.just(repository.save(newUser));
     }
 
     // Find
     @GetMapping("/users/{id}")
-    Utilisateur findOne(@PathVariable Long id) throws UserNotFoundException {
-        Optional<Utilisateur> foundUser = Optional.of(repository.findById(id));
-        if (!foundUser.isPresent())
+    Mono<Utilisateur> findOne(@PathVariable Long id) throws UserNotFoundException {
+        Optional<Utilisateur> foundUser = repository.findById(id);
+        if (foundUser.isEmpty())
             throw new UserNotFoundException(id);
-        return foundUser.get();
+        return Mono.just(foundUser.get());
     }
 
     // Save or update
     @PutMapping("/users/{id}")
-    Utilisateur saveOrUpdate(@RequestBody Utilisateur newUser, @PathVariable Long id) {
-        Optional<Utilisateur> foundUser = Optional.of(repository.findById(id));
+    Mono<Utilisateur> saveOrUpdate(@RequestBody Utilisateur newUser, @PathVariable Long id) {
+        Optional<Utilisateur> foundUser = repository.findById(id);
 
         return foundUser.map(x -> {
             x.setLogin(newUser.getLogin());
@@ -64,10 +65,10 @@ public class QcmController {
             x.setPrenom(newUser.getPrenom());
             x.setSociete(newUser.getSociete());
 
-            return repository.save(x);
+            return Mono.just(repository.save(x));
         }).orElseGet(() -> {
             newUser.setIdUtilisateur(id);
-            return repository.save(newUser);
+            return Mono.just(repository.save(newUser));
         });
     }
 

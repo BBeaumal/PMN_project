@@ -3,9 +3,11 @@ package com.backend.qcmplus.repository;
 import com.backend.qcmplus.model.Utilisateur;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UtilisateurRepository extends JpaRepository<Utilisateur, Integer> {
+import java.util.Optional;
+
+public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
 
     void deleteById(Long id);
 
-    Utilisateur findById(Long id);
+    Optional<Utilisateur> findById(Long id);
 }
