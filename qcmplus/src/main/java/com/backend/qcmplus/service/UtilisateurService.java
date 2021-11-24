@@ -20,8 +20,8 @@ public class UtilisateurService {
         return userRepository.findAll();
     }
 
-    public void saveUser(Utilisateur user) {
-        userRepository.save(user);
+    public Utilisateur saveUser(Utilisateur user) {
+        return userRepository.save(user);
     }
 
     public Optional<Utilisateur> getUtilisateur(Long id) {
@@ -30,5 +30,9 @@ public class UtilisateurService {
 
     public void deleteUtilisateur(Long id) {
         userRepository.deleteById(id);
+    }
+
+    public Optional<Utilisateur> findById(Long id) {
+        return userRepository.findById(id);
     }
 }
