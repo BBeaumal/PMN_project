@@ -18,7 +18,6 @@ public class Question implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idQuestion;
-
     private String intitule;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
