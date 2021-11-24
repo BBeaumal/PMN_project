@@ -9,13 +9,30 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-public interface UtilisateurService {
+@Service
+@Transactional
+public class UtilisateurService {
 
-    List<Utilisateur> listAllUser();
+    @Autowired
+    private UtilisateurRepository userRepository;
 
-    Utilisateur saveUser(Utilisateur user);
+    public List<Utilisateur> listAllUser() {
+        return userRepository.findAll();
+    }
 
-    Optional<Utilisateur> getUtilisateur(Long id);
+    public Utilisateur saveUser(Utilisateur user) {
+        return userRepository.save(user);
+    }
 
-    void deleteUtilisateur(Long id);
+    public Optional<Utilisateur> getUtilisateur(Long id) {
+        return userRepository.findById(id);
+    }
+
+    public void deleteUtilisateur(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    public Optional<Utilisateur> findById(Long id) {
+        return userRepository.findById(id);
+    }
 }
