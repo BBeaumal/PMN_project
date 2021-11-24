@@ -5,5 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Integer> {
 
-    void deleteById(Integer id);
+    void deleteById(Long id);
+
+    Utilisateur findById(Long id);
 }

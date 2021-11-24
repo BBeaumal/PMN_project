@@ -38,4 +38,5 @@ public class Utilisateur implements Serializable {
                 + ", mail='" + mail + '\'' + ", login='" + login + '\'' + ", password='" + password + '\''
                 + ", societe='" + societe + '\'' + ", isadmin=" + isadmin + '}';
     }
+
 }
