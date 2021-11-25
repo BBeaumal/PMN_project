@@ -1,38 +1,19 @@
 package com.backend.qcmplus.service;
 
 import com.backend.qcmplus.model.Utilisateur;
-import com.backend.qcmplus.repository.UtilisateurRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Service
-@Transactional
-public class UtilisateurService {
+public interface UtilisateurService {
 
-    @Autowired
-    private UtilisateurRepository userRepository;
+    List<Utilisateur> listAllUser();
 
-    public List<Utilisateur> listAllUser() {
-        return userRepository.findAll();
-    }
+    Utilisateur saveUser(Utilisateur user);
 
-    public Utilisateur saveUser(Utilisateur user) {
-        return userRepository.save(user);
-    }
+    Optional<Utilisateur> getUtilisateur(Long id);
 
-    public Optional<Utilisateur> getUtilisateur(Long id) {
-        return userRepository.findById(id);
-    }
+    Utilisateur getUtilisateurByCredential(String identifiant, String password);
 
-    public void deleteUtilisateur(Long id) {
-        userRepository.deleteById(id);
-    }
-
-    public Optional<Utilisateur> findById(Long id) {
-        return userRepository.findById(id);
-    }
+    void deleteUtilisateur(Long id);
 }

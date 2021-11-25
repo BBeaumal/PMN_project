@@ -26,10 +26,29 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     public Optional<Utilisateur> getUtilisateur(Long id) {
-        return userRepository.findById(id);
+        return userRepository.findByidUtilisateur(id);
+    }
+
+    @Override
+    public Utilisateur getUtilisateurByCredential(String login, String password) {
+        login = login.toLowerCase();
+        password = password.toLowerCase();
+        if (login.startsWith(" ")){
+            login = login.substring(1).replace(" ", "");
+        }
+        if (login.endsWith(" ")){
+            login = login.substring(login.length()).replace(" ", "");
+        }
+        if (password.startsWith(" ")){
+            password = password.substring(1).replace(" ", "");
+        }
+        if (password.endsWith(" ")){
+            password = password.substring(password.length()).replace(" ", "");
+        }
+        return userRepository.findUtilisateurByLogin(login);
     }
 
     public void deleteUtilisateur(Long id) {
-        userRepository.deleteById(id);
+        userRepository.deleteByidUtilisateur(id);
     }
 }
