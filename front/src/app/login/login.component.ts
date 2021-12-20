@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {RestapiService} from "./restapi.service";
+import {RestapiService} from "../restapi.service";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   username="";
   password="";
 
-  constructor(private service: RestapiService) { }
+  constructor(private service: RestapiService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -22,6 +23,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.service.login(this.username, this.password).subscribe(value => console.log(value));
+    this.service.login(this.username, this.password).subscribe(() => {
+      sessionStorage.setItem("secure-pmn-token", 'Basic ' + btoa(this.username + ':' + this.password))
+      this.router.navigate(['home']);
+    });
   }
 }
