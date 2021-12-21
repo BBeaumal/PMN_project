@@ -20,8 +20,8 @@ public class Question implements Serializable {
     private Long idQuestion;
     private String intitule;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private List<Resultat> reponses;
+    @OneToMany(mappedBy = "reponse", cascade = CascadeType.ALL)
+    private List<Reponse> reponses;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_questionnaire")

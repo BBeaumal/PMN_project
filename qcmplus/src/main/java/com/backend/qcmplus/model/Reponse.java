@@ -12,14 +12,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Resultat implements Serializable {
+public class Reponse implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idReponse;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_question")
-    private Question question;
+    @JoinColumn(name = "id_reponse")
+    private Reponse reponse;
 
     private String libelle;
 
