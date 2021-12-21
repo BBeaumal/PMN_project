@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {RestapiService} from "../restapi.service";
+import {Utilisateur} from "../models/utilisateur";
 
 @Component({
   selector: 'app-home',
@@ -8,10 +10,15 @@ import {HttpClient} from "@angular/common/http";
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  utilisateurs: Utilisateur[] = [];
+
+  displayedColumns: string[] = ['Nom', 'Prenom', 'Email', 'Societe', 'Supprimer', 'Editer'];
+
+
+  constructor(private http: HttpClient, private restapiService: RestapiService) { }
 
   ngOnInit(): void {
-    this.http.get("http://localhost:8080/admin/rest/users").subscribe(value => console.log(value));
+    this.restapiService.usersList().subscribe(utilisateurs => this.utilisateurs = utilisateurs);
   }
 
 }
