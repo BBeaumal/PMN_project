@@ -96,6 +96,13 @@ public class AdminController {
         return Mono.just(surveyService.saveSurvey(newSurvey));
     }
 
+    //Get all surveys
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/surveys")
+    Mono<List<Questionnaire>> findAllSurveys() {
+        return Mono.just((surveyService.listAllSurvey()));
+    }
+
     // Save Question
     // return 201 instead of 200
     // @ResponseStatus(HttpStatus.CREATED)
