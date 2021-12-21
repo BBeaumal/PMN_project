@@ -8,14 +8,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Resultat")
+@Table(name = "Reponse")
 @Getter
 @Setter
 @NoArgsConstructor
 public class Resultat implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idResultat;
+    private Long idReponse;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_question")
@@ -27,7 +27,7 @@ public class Resultat implements Serializable {
 
     @Override
     public String toString() {
-        return "Resultat [idResultat=" + idResultat + ", iscorrect=" + isCorrect + ", libelle=" + libelle + "]";
+        return "Resultat [idReponse=" + idReponse + ", iscorrect=" + isCorrect + ", libelle=" + libelle + "]";
     }
 
 }

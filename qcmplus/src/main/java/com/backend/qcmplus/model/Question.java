@@ -21,7 +21,7 @@ public class Question implements Serializable {
     private String intitule;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private List<Resultat> resultat;
+    private List<Resultat> reponses;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_questionnaire")
