@@ -1,0 +1,10 @@
+table {
+    width: 50%;
+  }
+  
+.icon{
+    &:hover ::ng-deep{
+      cursor: pointer;
+      color: #107eb6;
+    }
+}
