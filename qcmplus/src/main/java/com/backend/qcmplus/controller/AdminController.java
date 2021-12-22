@@ -14,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +41,7 @@ public class AdminController {
     @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/users")
+    //TODO: changer le nom de la méthode
     Mono<Utilisateur> newBook(@RequestBody Utilisateur newUser) {
         String pwd = newUser.getPassword();
         String encryptPwd = passwordEncoder.encode(pwd);
@@ -93,6 +96,10 @@ public class AdminController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/survey")
     Mono<Questionnaire> newSurvey(@RequestBody Questionnaire newSurvey) {
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");//dd/MM/yyyy
+        Date now = new Date();
+        String strDate = sdfDate.format(now);
+        newSurvey.setDateCreation(strDate);
         return Mono.just(surveyService.saveSurvey(newSurvey));
     }
 
@@ -135,7 +142,7 @@ public class AdminController {
         Optional<Questionnaire> foundSurvey = surveyService.findById(id);
 
         return foundSurvey.map(x -> {
-            x.setAuteur(newSurvey.getAuteur());
+            x.setDescription(newSurvey.getDescription());
             x.setDateCreation(newSurvey.getDateCreation());
             x.setNomQuestionnaire(newSurvey.getNomQuestionnaire());
             x.setListeQuestion(newSurvey.getListeQuestion());

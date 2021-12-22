@@ -19,8 +19,9 @@ export class AjoutQuestionnaireComponent implements OnInit {
 
   onSubmit(form: NgForm): void {
     this.questionnaire.nomQuestionnaire = form.value['intitule'];
-    this.questionnaire.descritpion = form.value['description'];
-    this.http.post<Questionnaire>('http://localhost:8080/admin/rest/survey', this.questionnaire).subscribe();
+    this.questionnaire.description = form.value['description'];
+    this.http.post<Questionnaire>('http://localhost:8080/admin/rest/survey',
+      this.questionnaire).subscribe();
   }
 
 }

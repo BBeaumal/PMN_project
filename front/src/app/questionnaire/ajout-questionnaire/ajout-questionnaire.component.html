@@ -3,16 +3,13 @@
   <form class="column" ngNativeValidate (ngSubmit)="onSubmit(form)" #form="ngForm">
 
     <mat-form-field appearance="outline">
-      <label>Intitulé</label>
       <mat-label>Intitulé</mat-label>
       <input name="intitule" matInput placeholder="Intitulé" ngModel required>
     </mat-form-field>
 
-
-
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="fill">
       <mat-label>Description</mat-label>
-      <textarea id="description" class="form-control" ngModel required rows="4" cols="50"></textarea>
+      <textarea matInput placeholder="description" ngModel required rows="4" cols="50"></textarea>
     </mat-form-field>
 
     <div>
