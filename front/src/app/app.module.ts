@@ -18,6 +18,7 @@ import { AjoutUtilisateurComponent } from './home/ajout-utilisateur/ajout-utilis
 import { ListeUtilisateursComponent } from './home/liste-utilisateurs/liste-utilisateurs.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {MatInputModule} from "@angular/material/input";
     LoginComponent,
     HomeComponent,
     AjoutUtilisateurComponent,
-    ListeUtilisateursComponent
+    ListeUtilisateursComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
