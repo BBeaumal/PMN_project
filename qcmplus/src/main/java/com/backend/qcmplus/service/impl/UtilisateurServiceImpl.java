@@ -18,7 +18,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     UtilisateurRepository userRepository;
 
     public List<Utilisateur> listAllUser() {
-        return userRepository.findAll();
+        return userRepository.findAllByIsadminFalse();
     }
 
     public Utilisateur saveUser(Utilisateur user) {
