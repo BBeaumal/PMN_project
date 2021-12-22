@@ -17,7 +17,7 @@ export class QuestionComponent implements OnInit {
   constructor(private http: HttpClient, private restapiService: RestapiService) { }
 
   ngOnInit(): void {
-    this.restapiService.questionsList().subscribe(utilisateurs => this.questions = utilisateurs);
+    this.restapiService.questionsList(1).subscribe(utilisateurs => this.questions = utilisateurs);
   }
 
 }

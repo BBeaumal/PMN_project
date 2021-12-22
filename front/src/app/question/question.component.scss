@@ -1,5 +1,5 @@
 table {
-    width: 50%;
+    width: auto;
   }
   
 .icon{
@@ -7,4 +7,8 @@ table {
       cursor: pointer;
       color: #107eb6;
     }
+}
+
+table td, table th {
+  padding: 5px 10px;
 }
