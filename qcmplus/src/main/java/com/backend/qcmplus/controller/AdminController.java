@@ -113,13 +113,20 @@ public class AdminController {
         return foundQuestion.map(x -> {
             x.setIntitule(newQuestion.getIntitule());
             x.setQuestionnaire(newQuestion.getQuestionnaire());
-            x.setResultat(newQuestion.getResultat());
+            x.setReponses(newQuestion.getReponses());
 
             return Mono.just(questionService.saveQuestion(x));
         }).orElseGet(() -> {
             newQuestion.setIdQuestion(id);
             return Mono.just(questionService.saveQuestion(newQuestion));
         });
+    }
+
+    // Get Survey Question
+    // return 201 instead of 200
+    @GetMapping("/survey/{id}/question")
+    Mono<List<Question>> getAllQuestion(@PathVariable long id) {
+        return Mono.just(surveyService.listAllQuestion(id));
     }
 
     // Save or update Survey

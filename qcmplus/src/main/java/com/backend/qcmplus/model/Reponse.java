@@ -18,8 +18,8 @@ public class Reponse implements Serializable {
     private Long idReponse;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_reponse")
-    private Reponse reponse;
+    @JoinColumn(name = "id_question")
+    private Question question;
 
     private String libelle;
 

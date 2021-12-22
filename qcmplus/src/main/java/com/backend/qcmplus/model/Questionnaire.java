@@ -2,6 +2,8 @@ package com.backend.qcmplus.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,6 +28,7 @@ public class Questionnaire implements Serializable {
 
     private Date dateCreation;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "idQuestion", cascade = CascadeType.ALL)
     private List<Question> listeQuestion;
 
