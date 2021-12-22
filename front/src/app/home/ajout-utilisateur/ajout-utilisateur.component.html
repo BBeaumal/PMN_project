@@ -2,14 +2,14 @@
 <div>
   <form class="column" ngNativeValidate (ngSubmit)="onSubmit(form)" #form="ngForm">
 
+    <span *ngIf="utilisateurService.afficherErreur" style="color: red;"><strong>Cet identifiant existe déjà</strong></span>
     <mat-form-field appearance="outline">
       <mat-label>Identifiant</mat-label>
-      <input name="identifiant" matInput placeholder="Identifiant" ngModel required>
+      <input name="identifiant" matInput placeholder="Identifiant" [(ngModel)]="this.utilisateurService.utilisateur.login" required>
     </mat-form-field>
-
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" *ngIf="!utilisateurService.isModifier">
       <mat-label>Mot de passe</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" name="password" placeholder="Mot de passe" maxlength="24" ngModel required matInput>
+      <input matInput [type]="hide ? 'password' : 'text'" name="password" placeholder="Mot de passe" maxlength="24" ngModel required>
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
@@ -17,25 +17,31 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Nom</mat-label>
-      <input type="text" name="nom" placeholder="Nom" maxlength="32" ngModel required matInput>
+      <input type="text" name="nom" placeholder="Nom" maxlength="32" [(ngModel)]="this.utilisateurService.utilisateur.nom" required matInput>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Prénom</mat-label>
-      <input type="text" name="prenom" placeholder="Prénom" maxlength="32" ngModel required matInput>
+      <input type="text" name="prenom" placeholder="Prénom" maxlength="32" [(ngModel)]="this.utilisateurService.utilisateur.prenom" required matInput>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Société</mat-label>
-      <input type="text" name="societe" placeholder="Société" maxlength="32" ngModel required matInput>
+      <input type="text" name="societe" placeholder="Société" maxlength="32" [(ngModel)]="this.utilisateurService.utilisateur.societe" required matInput>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Adresse mail</mat-label>
-      <input type="text" name="email" placeholder="Email" maxlength="32" ngModel required matInput>
+      <input type="text" name="email" placeholder="Email" maxlength="32" [(ngModel)]="this.utilisateurService.utilisateur.mail" required matInput>
     </mat-form-field>
 
-
+    <mat-form-field appearance="outline" *ngIf="utilisateurService.isModifier">
+      <mat-label>Nouveau mot de passe</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" name="password" placeholder="Nouveau mot de passe" maxlength="24" ngModel>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
 
     <div>
       <button mat-raised-button color="warn" class="cancel" (click)="annuler()">Annuler</button>

@@ -19,4 +19,8 @@ export class RestapiService {
   usersList(): Observable<Utilisateur[]> {
     return this.http.get<Utilisateur[]>("http://localhost:8080/admin/rest/users");
   }
+
+  supprimerUtilisateur(element: Utilisateur) {
+    return this.http.get("http://localhost:8080/admin/rest/user/"+element.idUtilisateur);
+  }
 }
