@@ -1,0 +1,46 @@
+<h2>Création d'un utilisateur</h2>
+<div>
+  <form class="column" ngNativeValidate (ngSubmit)="onSubmit(form)" #form="ngForm">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Identifiant</mat-label>
+      <input name="identifiant" matInput placeholder="Identifiant" ngModel required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Mot de passe</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" name="password" placeholder="Mot de passe" maxlength="24" ngModel required matInput>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Nom</mat-label>
+      <input type="text" name="nom" placeholder="Nom" maxlength="32" ngModel required matInput>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Prénom</mat-label>
+      <input type="text" name="prenom" placeholder="Prénom" maxlength="32" ngModel required matInput>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Société</mat-label>
+      <input type="text" name="societe" placeholder="Société" maxlength="32" ngModel required matInput>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Adresse mail</mat-label>
+      <input type="text" name="email" placeholder="Email" maxlength="32" ngModel required matInput>
+    </mat-form-field>
+
+
+
+    <div>
+      <button mat-raised-button color="warn" class="cancel" (click)="annuler()">Annuler</button>
+      <button mat-raised-button color="primary" type="submit">Créer</button>
+    </div>
+
+  </form>
+</div>

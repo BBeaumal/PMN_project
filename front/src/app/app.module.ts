@@ -13,12 +13,19 @@ import {AuthGuard} from "./guard/AuthGuard";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
+import { AjoutUtilisateurComponent } from './home/ajout-utilisateur/ajout-utilisateur.component';
+import { ListeUtilisateursComponent } from './home/liste-utilisateurs/liste-utilisateurs.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    AjoutUtilisateurComponent,
+    ListeUtilisateursComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +34,10 @@ import {MatIconModule} from "@angular/material/icon";
     HttpClientModule,
     BrowserAnimationsModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [RestapiService, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, AuthGuard],
   bootstrap: [AppComponent]

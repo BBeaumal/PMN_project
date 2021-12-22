@@ -6,5 +6,5 @@ export interface Utilisateur {
     password: string;
     societe: string;
     mail: string;
-    isadmin: string;
+    isadmin: boolean;
 }

@@ -38,8 +38,8 @@ public class AdminController {
     // @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/users")
-    Mono<Utilisateur> newBook(@RequestBody Utilisateur newUser) {
+    @PostMapping("/user")
+    Mono<Utilisateur> newUser(@RequestBody Utilisateur newUser) {
         String pwd = newUser.getPassword();
         String encryptPwd = passwordEncoder.encode(pwd);
         newUser.setPassword(encryptPwd);
