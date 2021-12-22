@@ -16,7 +16,11 @@ export class QuestionnaireService {
     this.isCreation = true;
   }
   deleteSurvey(questionnaire: Questionnaire) {
-    return this.http.get<Questionnaire>("http://localhost:8080/admin/rest/survey/" + questionnaire.idQuestionnaire).subscribe();
+    if (confirm("Voulez vous vraiment supprimer ce questionnaire ?")) {
+      return this.http.get<Questionnaire>("http://localhost:8080/admin/rest/survey/" +
+        questionnaire.idQuestionnaire).subscribe();
+    }
+    return null;
   }
 }
 
