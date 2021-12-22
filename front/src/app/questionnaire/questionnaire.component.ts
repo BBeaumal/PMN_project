@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Questionnaire } from '../models/questionnaire';
 import { RestapiService } from '../restapi.service';
+import { QuestionnaireService } from '../services/questionnaire.service';
 
 @Component({
   selector: 'app-questionnaire',
@@ -10,13 +10,8 @@ import { RestapiService } from '../restapi.service';
 })
 export class QuestionnaireComponent implements OnInit {
 
-  surveys: Questionnaire[] = [];
-  displayedColumns: string[] = ['ID', 'Nom', 'Auteur', 'Date de creation', 'Supprimer', 'Editer'];
-
-  constructor(private http: HttpClient, private restapiService: RestapiService) { }
+  constructor(public questionnaireService: QuestionnaireService) { }
 
   ngOnInit(): void {
-    this.restapiService.questionnairesList().subscribe(surveys => this.surveys = surveys)
   }
-
 }

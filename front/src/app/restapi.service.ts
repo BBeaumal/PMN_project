@@ -23,4 +23,8 @@ export class RestapiService {
   questionnairesList(): Observable<Questionnaire[]> {
     return this.http.get<Questionnaire[]>("http://localhost:8080/admin/rest/surveys");
   }
+
+  // saveSurvey() : Observable<Questionnaire>{
+  //   return this.http.post<Questionnaire>("","", "http://localhost:8080/admin/rest/survey");
+  // }
 }

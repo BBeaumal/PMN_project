@@ -1,6 +1,7 @@
 export interface Questionnaire {
-    idQuestionnaire : number;
-    nomQuestionnaire : string;
-    auteur : String;
-    dateCreation : Date;
+    idQuestionnaire: number;
+    nomQuestionnaire: string;
+    descritpion: string;
+    auteur: string;
+    dateCreation: Date;
 }
