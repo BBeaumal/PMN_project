@@ -154,7 +154,7 @@ public class AdminController {
         });
     }
 
-    @DeleteMapping("/survey/{id}")
+    @GetMapping("/survey/{id}")
     void deleteSurvey(@PathVariable Long id) {
         surveyService.deleteSurvey(id);
     }

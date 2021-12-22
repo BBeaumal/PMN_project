@@ -27,7 +27,7 @@
     <ng-container matColumnDef="Supprimer">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-            <mat-icon class="icon" aria-hidden="false" aria-label="supprimer">delete</mat-icon>
+            <mat-icon class="icon" aria-hidden="false" aria-label="supprimer" (click)="questionnaireService.deleteSurvey(element)">delete</mat-icon>
         </td>
     </ng-container>
 
