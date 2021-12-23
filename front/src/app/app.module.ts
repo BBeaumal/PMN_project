@@ -23,6 +23,8 @@ import { AjoutUtilisateurComponent } from './home/ajout-utilisateur/ajout-utilis
 import { ListeUtilisateursComponent } from './home/liste-utilisateurs/liste-utilisateurs.component';
 import { MenuComponent } from './menu/menu.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {QuestionComponent} from "./question/question.component";
+import {AjoutQuestionComponent} from "./question/ajout-question/ajout-question.component";
 
 @NgModule({
   declarations: [
