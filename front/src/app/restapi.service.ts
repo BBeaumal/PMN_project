@@ -20,7 +20,13 @@ export class RestapiService {
   usersList(): Observable<Utilisateur[]> {
     return this.http.get<Utilisateur[]>("http://localhost:8080/admin/rest/users");
   }
+
   questionnairesList(): Observable<Questionnaire[]> {
     return this.http.get<Questionnaire[]>("http://localhost:8080/admin/rest/surveys");
+  }
+   
+  supprimerUtilisateur(element: Utilisateur) {
+    return this.http.get("http://localhost:8080/admin/rest/user/"+element.idUtilisateur);
+
   }
 }
