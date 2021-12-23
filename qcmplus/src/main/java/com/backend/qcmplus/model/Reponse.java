@@ -23,11 +23,11 @@ public class Reponse implements Serializable {
 
     private String libelle;
 
-    private boolean isCorrect;
+    private Boolean isCorrect;
 
     @Override
     public String toString() {
-        return "Resultat [idReponse=" + idReponse + ", iscorrect=" + isCorrect + ", libelle=" + libelle + "]";
+        return "Reponse [idReponse=" + idReponse + ", iscorrect=" + isCorrect + ", libelle=" + libelle + "]";
     }
 
 }

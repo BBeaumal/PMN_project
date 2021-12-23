@@ -1,5 +1,9 @@
+import { Questionnaire } from "./questionnaire";
+import { Reponse } from "./reponse";
+
 export interface Question {
     idQuestion: number;
     intitule: string;
-    id_questionnaire: number;
+    reponses: Reponse[];
+    questionnaire: Questionnaire;
 }

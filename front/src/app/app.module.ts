@@ -15,13 +15,18 @@ import { MatTableModule } from "@angular/material/table";
 import { MatIconModule } from "@angular/material/icon";
 import { QuestionComponent } from './question/question.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { AjoutQuestionComponent } from './question/ajout-question/ajout-question.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    QuestionComponent
+    QuestionComponent,
+    AjoutQuestionComponent
   ],
   imports: [
     BrowserModule,
@@ -31,8 +36,12 @@ import { MatButtonModule } from '@angular/material/button';
     BrowserAnimationsModule,
     MatTableModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
+
   providers: [RestapiService, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, AuthGuard],
   bootstrap: [AppComponent]
 })
