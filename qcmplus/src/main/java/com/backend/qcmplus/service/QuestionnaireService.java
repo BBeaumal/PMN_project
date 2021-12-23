@@ -2,6 +2,7 @@ package com.backend.qcmplus.service;
 
 import com.backend.qcmplus.model.Question;
 import com.backend.qcmplus.model.Questionnaire;
+import com.backend.qcmplus.repository.QuestionRepository;
 import com.backend.qcmplus.repository.QuestionnaireRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,9 @@ public class QuestionnaireService {
 
     @Autowired
     private QuestionnaireRepository questionnaireRepository;
+
+    @Autowired
+    private QuestionRepository questionRepository;
 
     public List<Questionnaire> listAllSurvey() {
         return questionnaireRepository.findAll();

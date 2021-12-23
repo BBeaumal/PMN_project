@@ -27,7 +27,7 @@ public class Questionnaire implements Serializable {
     private String dateCreation;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "idQuestion", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "questionnaire", cascade = CascadeType.ALL)
     private List<Question> listeQuestion;
 
 }
