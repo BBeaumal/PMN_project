@@ -14,7 +14,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+
 import javax.transaction.Transactional;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -39,6 +41,16 @@ public class AdminController {
     // Save
     @Transactional
     @PreAuthorize("hasAnyRole('ADMIN')")
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/users")
+    //TODO: changer le nom de la méthode
+    Mono<Utilisateur> newBook(@RequestBody Utilisateur newUser) {
+        String pwd = newUser.getPassword();
+        String encryptPwd = passwordEncoder.encode(pwd);
+        newUser.setPassword(encryptPwd);
+        return Mono.just(utilisateurService.saveUser(newUser));
+
     @PostMapping("/user")
     HttpStatus newUser(@RequestBody Utilisateur newUser) throws Exception {
         if ("".equals(newUser.getPassword()) || newUser.getPassword() == null){
@@ -56,6 +68,7 @@ public class AdminController {
         }
         utilisateurService.saveUser(newUser);
         return HttpStatus.CREATED;
+
     }
 
     // Find
@@ -108,7 +121,15 @@ public class AdminController {
         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");//dd/MM/yyyy
         Date now = new Date();
         String strDate = sdfDate.format(now);
+        newSurvey.setDateCreation(strDate);
         return Mono.just(surveyService.saveSurvey(newSurvey));
+    }
+
+    //Get all surveys
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/surveys")
+    Mono<List<Questionnaire>> findAllSurveys() {
+        return Mono.just((surveyService.listAllSurvey()));
     }
 
     // Save Question
@@ -143,7 +164,7 @@ public class AdminController {
         Optional<Questionnaire> foundSurvey = surveyService.findById(id);
 
         return foundSurvey.map(x -> {
-            x.setAuteur(newSurvey.getAuteur());
+            x.setDescription(newSurvey.getDescription());
             x.setDateCreation(newSurvey.getDateCreation());
             x.setNomQuestionnaire(newSurvey.getNomQuestionnaire());
             x.setListeQuestion(newSurvey.getListeQuestion());
@@ -155,7 +176,7 @@ public class AdminController {
         });
     }
 
-    @DeleteMapping("/survey/{id}")
+    @GetMapping("/survey/{id}")
     void deleteSurvey(@PathVariable Long id) {
         surveyService.deleteSurvey(id);
     }

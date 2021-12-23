@@ -1,13 +1,11 @@
 package com.backend.qcmplus.model;
 
-import javax.persistence.*;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -22,9 +20,9 @@ public class Questionnaire implements Serializable {
 
     private String nomQuestionnaire;
 
-    private String auteur;
+    private String description;
 
-    private Date dateCreation;
+    private String dateCreation;
 
     @OneToMany(mappedBy = "idQuestion", cascade = CascadeType.ALL)
     private List<Question> listeQuestion;

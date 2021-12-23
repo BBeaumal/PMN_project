@@ -1,0 +1,21 @@
+<h2>Création d'un questionnaire</h2>
+<div>
+  <form class="column" ngNativeValidate (ngSubmit)="onSubmit(form)" #form="ngForm">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Intitulé</mat-label>
+      <input name="intitule" matInput placeholder="Intitulé" ngModel required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea name="description" matInput placeholder="description" ngModel required rows="5"></textarea>
+    </mat-form-field>
+
+    <div>
+      <button mat-raised-button color="warn" class="cancel" (click)="questionnaireService.annuler()">Annuler</button>
+      <button mat-raised-button color="primary" type="submit">Créer</button>
+    </div>
+
+  </form>
+</div>

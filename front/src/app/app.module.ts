@@ -13,11 +13,14 @@ import {AuthGuard} from "./guard/AuthGuard";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
-import {MatButtonModule} from "@angular/material/button";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from "@angular/material/input";
+import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
+import { AjoutQuestionnaireComponent } from './questionnaire/ajout-questionnaire/ajout-questionnaire.component';
+import { ListeQuestionnaireComponent } from './questionnaire/liste-questionnaire/liste-questionnaire.component';
 import { AjoutUtilisateurComponent } from './home/ajout-utilisateur/ajout-utilisateur.component';
 import { ListeUtilisateursComponent } from './home/liste-utilisateurs/liste-utilisateurs.component';
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
 import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
@@ -25,9 +28,13 @@ import { MenuComponent } from './menu/menu.component';
     AppComponent,
     LoginComponent,
     HomeComponent,
+    QuestionnaireComponent,
+    AjoutQuestionnaireComponent,
+    ListeQuestionnaireComponent,
     AjoutUtilisateurComponent,
     ListeUtilisateursComponent,
     MenuComponent
+
   ],
   imports: [
     BrowserModule,
