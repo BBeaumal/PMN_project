@@ -50,6 +50,7 @@ public class AdminController {
         String encryptPwd = passwordEncoder.encode(pwd);
         newUser.setPassword(encryptPwd);
         return Mono.just(utilisateurService.saveUser(newUser));
+    }
 
     @PostMapping("/user")
     HttpStatus newUser(@RequestBody Utilisateur newUser) throws Exception {

@@ -52,7 +52,9 @@ export class AjoutQuestionComponent implements OnInit {
 
     this.question.intitule = form.value['intitule'];
     this.question.reponses = tab;
-    this.question.questionnaire = new Questionnaire(1);
+    let questionnaire = new Questionnaire();
+    questionnaire.idQuestionnaire = 1;
+    this.question.questionnaire = questionnaire;
     console.log(this.question);
     this.http.post<Question>('http://localhost:8080/admin/rest/question', this.question).subscribe();
   }

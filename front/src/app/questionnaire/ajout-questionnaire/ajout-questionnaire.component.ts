@@ -10,7 +10,7 @@ import { QuestionnaireService } from 'src/app/services/questionnaire.service';
   styleUrls: ['./ajout-questionnaire.component.scss']
 })
 export class AjoutQuestionnaireComponent implements OnInit {
-  private questionnaire = {} as Questionnaire;
+  private questionnaire = new Questionnaire();
   hide = true;
 
   constructor(private http: HttpClient, public questionnaireService: QuestionnaireService) { }
