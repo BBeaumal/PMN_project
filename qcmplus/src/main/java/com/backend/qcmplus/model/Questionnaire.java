@@ -1,7 +1,6 @@
 package com.backend.qcmplus.model;
 
 import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
@@ -9,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -24,9 +22,9 @@ public class Questionnaire implements Serializable {
 
     private String nomQuestionnaire;
 
-    private String auteur;
+    private String description;
 
-    private Date dateCreation;
+    private String dateCreation;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "idQuestion", cascade = CascadeType.ALL)

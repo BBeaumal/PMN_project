@@ -14,6 +14,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+
+import javax.transaction.Transactional;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,16 +39,36 @@ public class AdminController {
     private QuestionService questionService;
 
     // Save
-    // return 201 instead of 200
-    // @ResponseStatus(HttpStatus.CREATED)
+    @Transactional
     @PreAuthorize("hasAnyRole('ADMIN')")
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/users")
+    //TODO: changer le nom de la méthode
     Mono<Utilisateur> newBook(@RequestBody Utilisateur newUser) {
         String pwd = newUser.getPassword();
         String encryptPwd = passwordEncoder.encode(pwd);
         newUser.setPassword(encryptPwd);
         return Mono.just(utilisateurService.saveUser(newUser));
+
+    @PostMapping("/user")
+    HttpStatus newUser(@RequestBody Utilisateur newUser) throws Exception {
+        if ("".equals(newUser.getPassword()) || newUser.getPassword() == null){
+            newUser.setPassword(utilisateurService.getUtilisateur(newUser.getIdUtilisateur()).get().getPassword());
+        } else {
+            String pwd = newUser.getPassword();
+            String encryptPwd = passwordEncoder.encode(pwd);
+            newUser.setPassword(encryptPwd);
+        }
+        if (newUser.getIdUtilisateur() == null){
+            Utilisateur utilisateur = utilisateurService.getUtilisateurByLogin(newUser.getLogin());
+            if (utilisateur != null){
+                throw new Exception("Ce login existe déjà");
+            }
+        }
+        utilisateurService.saveUser(newUser);
+        return HttpStatus.CREATED;
+
     }
 
     // Find
@@ -82,8 +107,8 @@ public class AdminController {
         });
     }
 
-    @DeleteMapping("/users/{id}")
-    void deleteBook(@PathVariable Long id) {
+    @GetMapping("/user/{id}")
+    void deleteUtilisateur(@PathVariable Long id) {
         utilisateurService.deleteUtilisateur(id);
     }
 
@@ -93,7 +118,18 @@ public class AdminController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/survey")
     Mono<Questionnaire> newSurvey(@RequestBody Questionnaire newSurvey) {
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");//dd/MM/yyyy
+        Date now = new Date();
+        String strDate = sdfDate.format(now);
+        newSurvey.setDateCreation(strDate);
         return Mono.just(surveyService.saveSurvey(newSurvey));
+    }
+
+    //Get all surveys
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/surveys")
+    Mono<List<Questionnaire>> findAllSurveys() {
+        return Mono.just((surveyService.listAllSurvey()));
     }
 
     // Save Question
@@ -135,7 +171,7 @@ public class AdminController {
         Optional<Questionnaire> foundSurvey = surveyService.findById(id);
 
         return foundSurvey.map(x -> {
-            x.setAuteur(newSurvey.getAuteur());
+            x.setDescription(newSurvey.getDescription());
             x.setDateCreation(newSurvey.getDateCreation());
             x.setNomQuestionnaire(newSurvey.getNomQuestionnaire());
             x.setListeQuestion(newSurvey.getListeQuestion());
@@ -147,7 +183,7 @@ public class AdminController {
         });
     }
 
-    @DeleteMapping("/survey/{id}")
+    @GetMapping("/survey/{id}")
     void deleteSurvey(@PathVariable Long id) {
         surveyService.deleteSurvey(id);
     }

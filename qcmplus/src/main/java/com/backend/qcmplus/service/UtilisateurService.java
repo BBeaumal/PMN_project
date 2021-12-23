@@ -13,7 +13,7 @@ public interface UtilisateurService {
 
     Optional<Utilisateur> getUtilisateur(Long id);
 
-    Utilisateur getUtilisateurByCredential(String identifiant, String password);
-
     void deleteUtilisateur(Long id);
+
+    Utilisateur getUtilisateurByLogin(String login);
 }

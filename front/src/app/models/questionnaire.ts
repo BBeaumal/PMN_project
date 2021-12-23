@@ -1,6 +1,9 @@
 export class Questionnaire {
     idQuestionnaire: number;
-    constructor(idQuestionnaire: number) {
-        this.idQuestionnaire = idQuestionnaire;
-    }
+    nomQuestionnaire: string;
+    description: string;
+    dateCreation: Date;
+  constructor(idQuestionnaire: number) {
+  this.idQuestionnaire = idQuestionnaire;
+}
 }

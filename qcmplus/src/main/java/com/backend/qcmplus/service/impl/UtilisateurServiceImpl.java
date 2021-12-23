@@ -18,7 +18,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     UtilisateurRepository userRepository;
 
     public List<Utilisateur> listAllUser() {
-        return userRepository.findAll();
+        return userRepository.findAllByIsadminFalse();
     }
 
     public Utilisateur saveUser(Utilisateur user) {
@@ -29,26 +29,12 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         return userRepository.findByidUtilisateur(id);
     }
 
-    @Override
-    public Utilisateur getUtilisateurByCredential(String login, String password) {
-        login = login.toLowerCase();
-        password = password.toLowerCase();
-        if (login.startsWith(" ")){
-            login = login.substring(1).replace(" ", "");
-        }
-        if (login.endsWith(" ")){
-            login = login.substring(login.length()).replace(" ", "");
-        }
-        if (password.startsWith(" ")){
-            password = password.substring(1).replace(" ", "");
-        }
-        if (password.endsWith(" ")){
-            password = password.substring(password.length()).replace(" ", "");
-        }
-        return userRepository.findUtilisateurByLogin(login);
-    }
-
     public void deleteUtilisateur(Long id) {
         userRepository.deleteByidUtilisateur(id);
+    }
+
+    @Override
+    public Utilisateur getUtilisateurByLogin(String login) {
+        return userRepository.findUtilisateurByLogin(login);
     }
 }
