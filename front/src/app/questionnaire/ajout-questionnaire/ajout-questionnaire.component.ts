@@ -10,7 +10,7 @@ import { QuestionnaireService } from 'src/app/services/questionnaire.service';
   styleUrls: ['./ajout-questionnaire.component.scss']
 })
 export class AjoutQuestionnaireComponent implements OnInit {
-  private questionnaire = {} as Questionnaire;
+  public questionnaire = {} as Questionnaire;
   hide = true;
 
   constructor(private http: HttpClient, public questionnaireService: QuestionnaireService) { }
@@ -19,10 +19,10 @@ export class AjoutQuestionnaireComponent implements OnInit {
   }
 
   onSubmit(form: NgForm): void {
-    this.questionnaire.nomQuestionnaire = form.value['intitule'];
-    this.questionnaire.description = form.value['description'];
+    this.questionnaireService.questionnaire.nomQuestionnaire = form.value['intitule'];
+    this.questionnaireService.questionnaire.description = form.value['description'];
     this.http.post<Questionnaire>('http://localhost:8080/admin/rest/survey',
-      this.questionnaire).subscribe(() => (this.questionnaireService.annuler()));
+      this.questionnaireService.questionnaire).subscribe(() => (this.questionnaireService.annuler()));
   }
 
 }
