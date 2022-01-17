@@ -4,3 +4,11 @@ nav{
 .bg-blue{
   background-color: #3f51b5;
 }
+
+.link{
+  cursor: pointer;
+  a {
+    text-decoration: none;
+    color: white;
+  }
+}
