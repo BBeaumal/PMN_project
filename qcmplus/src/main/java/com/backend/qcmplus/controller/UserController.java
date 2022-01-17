@@ -32,7 +32,7 @@ public class UserController {
     }
 
     // Find All Survey
-    @GetMapping("/survey")
+    @GetMapping("/surveys")
     Mono<List<Questionnaire>> findAllSurvey() {
         return Mono.just(surveyService.listAllSurvey());
     }

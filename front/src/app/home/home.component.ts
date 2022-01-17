@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UtilisateurService} from "./utilisateur.service";
+import {IsAdminService} from "../services/is-admin.service";
 
 @Component({
   selector: 'app-home',
@@ -8,9 +9,14 @@ import {UtilisateurService} from "./utilisateur.service";
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public utilisateurService: UtilisateurService) { }
+  public isAdmin = false;
+  constructor(public utilisateurService: UtilisateurService, public isAdminService: IsAdminService) { }
 
   ngOnInit(): void {
+    this.isAdminService.isAdminFunc().subscribe({
+      next: () => {this.isAdmin = true},
+      error: () => {this.isAdmin = false},
+    });
 
   }
 }

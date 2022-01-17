@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {RestapiService} from "../../restapi.service";
-import {Utilisateur} from "../../models/utilisateur";
-import {UtilisateurService} from "../utilisateur.service";
+import {RestapiService} from "../../../restapi.service";
+import {Utilisateur} from "../../../models/utilisateur";
+import {UtilisateurService} from "../../utilisateur.service";
 import {MatTableDataSource} from "@angular/material/table";
 
 @Component({

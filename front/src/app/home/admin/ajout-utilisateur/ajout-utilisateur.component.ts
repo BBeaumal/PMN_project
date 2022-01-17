@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {Utilisateur} from "../../models/utilisateur";
+import {Utilisateur} from "../../../models/utilisateur";
 import {HttpClient} from "@angular/common/http";
-import {UtilisateurService} from "../utilisateur.service";
+import {UtilisateurService} from "../../utilisateur.service";
 
 @Component({
   selector: 'app-ajout-utilisateur',
