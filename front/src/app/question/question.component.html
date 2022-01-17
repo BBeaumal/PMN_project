@@ -10,27 +10,25 @@
         <td mat-cell *matCellDef="let element"> {{element.intitule}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="IdQuestionnaire">
-        <th mat-header-cell *matHeaderCellDef> Id Questionnaire </th>
-        <td mat-cell *matCellDef="let element"> {{element.id_questionnaire}} </td>
-    </ng-container>
-
     <ng-container matColumnDef="Supprimer">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-            <mat-icon class="icon" aria-hidden="false" aria-label="supprimer">delete</mat-icon>
+            <mat-icon class="icon" aria-hidden="false" aria-label="supprimer" (click)="deleteQuestion(element)">delete
+            </mat-icon>
         </td>
     </ng-container>
 
     <ng-container matColumnDef="Editer">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-            <mat-icon class="icon" aria-hidden="false" aria-label="editer">edit</mat-icon>
+            <mat-icon class="icon" aria-hidden="false" aria-label="editer" (click)="editQuestion(element)">edit
+            </mat-icon>
         </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-
-<button mat-raised-button color="primary">Primary</button>
+<div>
+    <button mat-raised-button color="primary" routerLink="create">Ajouter une question</button>
+</div>

@@ -5,6 +5,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { Question } from 'src/app/models/question';
 import { Questionnaire } from 'src/app/models/questionnaire';
 import { Reponse } from 'src/app/models/reponse';
+import { QuestionService } from 'src/app/services/question.service';
 
 @Component({
   selector: 'app-ajout-question',
@@ -29,7 +30,7 @@ export class AjoutQuestionComponent implements OnInit {
   private question = {} as Question;
   hide = true;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private questionService: QuestionService) {
     this.isChecked1 = false;
     this.libelleReponse1 = "";
     this.libelleReponse2 = "";
@@ -38,7 +39,40 @@ export class AjoutQuestionComponent implements OnInit {
     this.libelleReponse5 = "";
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    console.log(this.questionService.question);
+    if (this.questionService.isCreation) {
+      this.questionService.question.reponses.forEach(
+        (value, index) => {
+          switch (index) {
+            case 0: {
+              this.libelleReponse1 = value.libelle
+              break;
+            }
+            case 1: {
+              this.libelleReponse2 = value.libelle
+              break;
+            }
+
+            case 2: {
+              this.libelleReponse3 = value.libelle
+              break;
+            }
+
+            case 3: {
+              this.libelleReponse4 = value.libelle
+              break;
+            }
+
+            case 4: {
+              this.libelleReponse5 = value.libelle
+              break;
+            }
+          }
+        }
+      )
+    }
+  }
 
   onSubmit(form: NgForm) {
 
@@ -56,7 +90,8 @@ export class AjoutQuestionComponent implements OnInit {
     questionnaire.idQuestionnaire = 1;
     this.question.questionnaire = questionnaire;
     console.log(this.question);
-    this.http.post<Question>('http://localhost:8080/admin/rest/question', this.question).subscribe();
+    this.http.post<Question>('http://localhost:8080/admin/rest/question',
+      this.question).subscribe();
   }
 
   toggle($event: MatCheckboxChange, numeroReponse: number) {

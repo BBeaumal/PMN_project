@@ -14,7 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
-
 import javax.transaction.Transactional;
 
 import java.text.SimpleDateFormat;
@@ -44,7 +43,7 @@ public class AdminController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/users")
-    //TODO: changer le nom de la méthode
+    // TODO: changer le nom de la méthode
     Mono<Utilisateur> newBook(@RequestBody Utilisateur newUser) {
         String pwd = newUser.getPassword();
         String encryptPwd = passwordEncoder.encode(pwd);
@@ -54,16 +53,16 @@ public class AdminController {
 
     @PostMapping("/user")
     HttpStatus newUser(@RequestBody Utilisateur newUser) throws Exception {
-        if ("".equals(newUser.getPassword()) || newUser.getPassword() == null){
+        if ("".equals(newUser.getPassword()) || newUser.getPassword() == null) {
             newUser.setPassword(utilisateurService.getUtilisateur(newUser.getIdUtilisateur()).get().getPassword());
         } else {
             String pwd = newUser.getPassword();
             String encryptPwd = passwordEncoder.encode(pwd);
             newUser.setPassword(encryptPwd);
         }
-        if (newUser.getIdUtilisateur() == null){
+        if (newUser.getIdUtilisateur() == null) {
             Utilisateur utilisateur = utilisateurService.getUtilisateurByLogin(newUser.getLogin());
-            if (utilisateur != null){
+            if (utilisateur != null) {
                 throw new Exception("Ce login existe déjà");
             }
         }
@@ -119,14 +118,14 @@ public class AdminController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/survey")
     Mono<Questionnaire> newSurvey(@RequestBody Questionnaire newSurvey) {
-        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");//dd/MM/yyyy
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");// dd/MM/yyyy
         Date now = new Date();
         String strDate = sdfDate.format(now);
         newSurvey.setDateCreation(strDate);
         return Mono.just(surveyService.saveSurvey(newSurvey));
     }
 
-    //Get all surveys
+    // Get all surveys
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/surveys")
     Mono<List<Questionnaire>> findAllSurveys() {
@@ -189,7 +188,7 @@ public class AdminController {
         surveyService.deleteSurvey(id);
     }
 
-    @DeleteMapping("/question/{id}")
+    @GetMapping("/question/{id}")
     void deleteQuestion(@PathVariable Long id) {
         questionService.deleteQuestion(id);
     }
