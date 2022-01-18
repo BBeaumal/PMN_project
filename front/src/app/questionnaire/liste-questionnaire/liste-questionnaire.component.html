@@ -34,7 +34,7 @@
     <ng-container matColumnDef="Editer">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-            <mat-icon class="icon" aria-hidden="false" aria-label="editer">edit</mat-icon>
+            <mat-icon class="icon" aria-hidden="false" aria-label="editer" (click)="editSurvey(element)">edit</mat-icon>
         </td>
     </ng-container>
 

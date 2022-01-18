@@ -7,13 +7,15 @@ import { Questionnaire } from '../models/questionnaire';
   providedIn: 'root'
 })
 export class QuestionnaireService {
-  private questionnaire = {} as Questionnaire;
+  public questionnaire = {} as Questionnaire;
   isCreation = false;
+  isModifier = false;
 
   constructor(private http: HttpClient) { }
 
   ajouterSurvey() {
     this.isCreation = true;
+    this.questionnaire = {} as Questionnaire
   }
   annuler() {
     this.isCreation = false;

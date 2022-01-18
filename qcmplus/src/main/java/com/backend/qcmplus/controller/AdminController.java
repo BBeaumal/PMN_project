@@ -46,11 +46,9 @@ public class AdminController {
     // Save
     @Transactional
     @PreAuthorize("hasAnyRole('ADMIN')")
-
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/users")
-    // TODO: changer le nom de la méthode
-    Mono<Utilisateur> newBook(@RequestBody Utilisateur newUser) {
+    Mono<Utilisateur> saveNewUser(@RequestBody Utilisateur newUser) {
         String pwd = newUser.getPassword();
         String encryptPwd = passwordEncoder.encode(pwd);
         newUser.setPassword(encryptPwd);

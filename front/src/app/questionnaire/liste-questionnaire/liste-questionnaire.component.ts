@@ -33,4 +33,10 @@ export class ListeQuestionnaireComponent implements OnInit {
       this.surveys.data = listeQuestionnaire;
     }
   }
+
+  editSurvey(questionnaire: Questionnaire) {
+    this.questionnaireService.questionnaire = questionnaire;
+    this.questionnaireService.isModifier = true;
+    this.questionnaireService.isCreation = true;
+  }
 }
