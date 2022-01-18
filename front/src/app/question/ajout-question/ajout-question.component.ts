@@ -17,6 +17,7 @@ import {Router} from "@angular/router";
 
 export class AjoutQuestionComponent implements OnInit {
 
+  intitule: string;
   isChecked1: boolean;
   isChecked2: boolean;
   isChecked3: boolean;
@@ -31,7 +32,6 @@ export class AjoutQuestionComponent implements OnInit {
 
   private question = {} as Question;
   hide = true;
-  intitule: string;
 
   constructor(private http: HttpClient, private questionService: QuestionService, private router: Router) {
     this.isChecked1 = false;
@@ -84,6 +84,10 @@ export class AjoutQuestionComponent implements OnInit {
           }
         }
       )
+      if (this.questionService.question.intitule) {
+        this.intitule = this.questionService.question.intitule
+      }
+      this.questionService.isCreation = false;
     }
   }
 
@@ -102,7 +106,6 @@ export class AjoutQuestionComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-
     let tab: Reponse[] = [];
     if (this.libelleReponse1.length > 0){
       tab.push(new Reponse(this.libelleReponse1, this.isChecked1, null));
