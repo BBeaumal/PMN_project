@@ -8,6 +8,7 @@ import { Reponse } from 'src/app/models/reponse';
 import { QuestionService } from 'src/app/services/question.service';
 import {QuestionBean} from "../../models/questionBean";
 import {Router} from "@angular/router";
+import {QuestionnaireService} from "../../services/questionnaire.service";
 
 @Component({
   selector: 'app-ajout-question',
@@ -33,7 +34,8 @@ export class AjoutQuestionComponent implements OnInit {
   private question = {} as Question;
   hide = true;
 
-  constructor(private http: HttpClient, private questionService: QuestionService, private router: Router) {
+  constructor(private http: HttpClient, private questionService: QuestionService, private router: Router, private questionnaireService: QuestionnaireService) {
+    console.log("in constructor")
     this.isChecked1 = false;
     this.isChecked2 = false;
     this.isChecked3 = false;
@@ -48,7 +50,7 @@ export class AjoutQuestionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.questionService.isCreation) {
+    if (this.questionService.isModification) {
       this.intitule = this.questionService.question.intitule;
       this.questionService.question.reponses.forEach(
         (value, index) => {
@@ -122,7 +124,7 @@ export class AjoutQuestionComponent implements OnInit {
       tab.push(new Reponse(this.libelleReponse5, this.isChecked5, null));
     }
 
-    if (this.questionService.isCreation){
+    if (this.questionService.isModification){
       this.question.idQuestion = this.questionService.question.idQuestion;
       this.questionService.question.reponses.forEach(repBdd => {
         let stop = false;
@@ -133,18 +135,19 @@ export class AjoutQuestionComponent implements OnInit {
           }
         })
       })
-      this.questionService.isCreation = false;
+      this.questionService.isModification = false;
     }
 
     this.question.intitule = form.value['intitule'];
     this.question.reponses = tab;
     let questionnaire = new Questionnaire();
-    questionnaire.idQuestionnaire = 1;
+    questionnaire.idQuestionnaire = this.questionnaireService.questionnaire.idQuestionnaire;
     this.question.questionnaire = questionnaire;
     this.http.post<Question>('http://localhost:8080/admin/rest/question',
       this.question).subscribe();
     this.resetFormulaire();
-    this.router.navigate(["/questions"]);
+    this.questionService.afficherQuestions = true;
+    this.questionService.afficherReponses = false;
   }
 
   toggle($event: MatCheckboxChange, numeroReponse: number) {
@@ -196,4 +199,9 @@ export class AjoutQuestionComponent implements OnInit {
 
   }
 
+  cancel() {
+    this.questionService.afficherQuestions = true;
+    this.questionService.afficherReponses = false;
+    this.questionService.isModification = false;
+  }
 }

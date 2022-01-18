@@ -12,6 +12,19 @@
       <textarea name="description" matInput placeholder="description" [(ngModel)]="this.questionnaireService.questionnaire.description" required rows="5"></textarea>
     </mat-form-field>
 
+    <div *ngIf="questionnaireService.isModifier" style="margin-bottom: 10px">
+      <button mat-raised-button color="primary" type="button" (click)="gererQuestions()">Gérer les questions</button>
+    </div>
+    <div>
+      <div style="display: block; width: 100%" *ngIf="questionService.afficherQuestions">
+        <app-question></app-question>
+      </div>
+
+      <div style="display: block; width: 100%" *ngIf="questionService.afficherReponses">
+        <app-ajout-question></app-ajout-question>
+      </div>
+    </div>
+
     <div>
       <button mat-raised-button color="warn" class="cancel" (click)="questionnaireService.annuler()">Annuler</button>
       <button mat-raised-button color="primary" type="submit">Créer</button>
@@ -19,3 +32,4 @@
 
   </form>
 </div>
+

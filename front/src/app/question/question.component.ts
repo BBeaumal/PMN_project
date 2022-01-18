@@ -5,6 +5,7 @@ import { RestapiService } from '../restapi.service';
 import { Question } from '../models/question';
 import { QuestionService } from '../services/question.service';
 import { Router } from '@angular/router';
+import {QuestionnaireService} from "../services/questionnaire.service";
 
 @Component({
   selector: 'app-question',
@@ -20,11 +21,11 @@ export class QuestionComponent implements OnInit {
   displayedColumns: string[] = ['idQuestion', 'Intitule', 'Supprimer', 'Editer'];
 
   constructor(private http: HttpClient, private restapiService: RestapiService,
-    private questionService: QuestionService, private router: Router) { }
+    public questionService: QuestionService, private router: Router, private questionnaireService: QuestionnaireService) { }
 
   ngOnInit(): void {
-    this.restapiService.questionsList(1).subscribe(utilisateurs => this.questions.data = utilisateurs);
-
+    this.restapiService.questionsList(this.questionnaireService.questionnaire.idQuestionnaire).subscribe(utilisateurs => this.questions.data = utilisateurs);
+    console.log("test")
   }
 
   deleteQuestion(question: Question) {
@@ -45,9 +46,17 @@ export class QuestionComponent implements OnInit {
   }
 
   editQuestion(question: Question) {
-    console.log("question before assignment " + question)
     this.questionService.question = question;
-    this.questionService.isCreation = true;
-    this.router.navigate(["/questions/create"]);
+    this.questionService.isModification = true;
+    this.questionService.afficherQuestions = false;
+    this.questionService.afficherReponses = true;
+
+  }
+
+  addQuestion() {
+    this.questionService.question = {} as Question;
+    this.questionService.afficherQuestions = false;
+    this.questionService.afficherReponses = true;
+    this.questionService.isModification = false;
   }
 }

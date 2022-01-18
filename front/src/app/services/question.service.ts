@@ -6,11 +6,10 @@ import { Question } from '../models/question';
 })
 export class QuestionService {
 
-  isCreation = false;
+  isModification = false;
   question = {} as Question;
+  afficherQuestions: boolean = false;
+  afficherReponses: boolean = false;
   constructor() { }
 
-  ajouterQuestion() {
-    this.isCreation = true;
-  }
 }

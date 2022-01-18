@@ -50,9 +50,9 @@
 
 
 
-        <div>
-            <button mat-raised-button color="warn" routerLink="/questions">Annuler</button>
-            <button mat-raised-button color="primary" type="submit">Créer</button>
+        <div style="margin-bottom: 50px;margin-top: 25px;display: flex;justify-content: center;">
+            <button class="btn-ajout-question" mat-raised-button color="warn" (click)="cancel()">Annuler</button>
+            <button class="btn-ajout-question" mat-raised-button color="primary" type="submit">Créer</button>
         </div>
 
     </form>

@@ -22,7 +22,7 @@ export class RestapiService {
     return this.http.get<Utilisateur[]>("http://localhost:8080/admin/rest/users");
   }
 
-  questionsList(id: number): Observable<Question[]> {
+  questionsList(id: any): Observable<Question[]> {
     return this.http.get<Question[]>("http://localhost:8080/admin/rest/survey/" + id + "/question");
   }
 

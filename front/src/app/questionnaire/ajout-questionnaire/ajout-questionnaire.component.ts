@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Questionnaire } from 'src/app/models/questionnaire';
 import { QuestionnaireService } from 'src/app/services/questionnaire.service';
+import {QuestionService} from "../../services/question.service";
 
 @Component({
   selector: 'app-ajout-questionnaire',
@@ -12,8 +13,9 @@ import { QuestionnaireService } from 'src/app/services/questionnaire.service';
 export class AjoutQuestionnaireComponent implements OnInit {
   public questionnaire = {} as Questionnaire;
   hide = true;
+  afficherQuestions: boolean = false;
 
-  constructor(private http: HttpClient, public questionnaireService: QuestionnaireService) { }
+  constructor(private http: HttpClient, public questionnaireService: QuestionnaireService, public questionService: QuestionService) { }
 
   ngOnInit(): void {
   }
@@ -25,4 +27,8 @@ export class AjoutQuestionnaireComponent implements OnInit {
       this.questionnaireService.questionnaire).subscribe(() => (this.questionnaireService.annuler()));
   }
 
+  gererQuestions() {
+    this.questionService.afficherQuestions = !this.questionService.afficherQuestions;
+    this.questionService.afficherReponses = false;
+  }
 }
