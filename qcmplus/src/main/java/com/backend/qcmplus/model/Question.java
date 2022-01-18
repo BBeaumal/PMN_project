@@ -2,6 +2,8 @@ package com.backend.qcmplus.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
@@ -20,9 +22,10 @@ public class Question implements Serializable {
     private Long idQuestion;
     private String intitule;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private List<Resultat> resultat;
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reponse> reponses;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_questionnaire")
     private Questionnaire questionnaire;

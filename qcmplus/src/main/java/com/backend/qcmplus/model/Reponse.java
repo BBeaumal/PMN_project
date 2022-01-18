@@ -3,31 +3,34 @@ package com.backend.qcmplus.model;
 import java.io.Serializable;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Resultat")
+@Table(name = "Reponse")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Resultat implements Serializable {
+public class Reponse implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idResultat;
+    private Long idReponse;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_question")
     private Question question;
 
     private String libelle;
 
-    private boolean isCorrect;
+    private Boolean isCorrect;
 
     @Override
     public String toString() {
-        return "Resultat [idResultat=" + idResultat + ", iscorrect=" + isCorrect + ", libelle=" + libelle + "]";
+        return "Reponse [idReponse=" + idReponse + ", iscorrect=" + isCorrect + ", libelle=" + libelle + "]";
     }
 
 }

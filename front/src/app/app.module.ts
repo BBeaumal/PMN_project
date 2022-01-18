@@ -23,6 +23,9 @@ import { AjoutUtilisateurComponent } from './home/admin/ajout-utilisateur/ajout-
 import { ListeUtilisateursComponent } from './home/admin/liste-utilisateurs/liste-utilisateurs.component';
 import { MenuComponent } from './menu/menu.component';
 import { ListeQuestionnaireUserComponent } from './home/stagiaire/liste-questionnaire-user/liste-questionnaire-user.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import {QuestionComponent} from "./question/question.component";
+import {AjoutQuestionComponent} from "./question/ajout-question/ajout-question.component";
 
 @NgModule({
   declarations: [
@@ -35,6 +38,8 @@ import { ListeQuestionnaireUserComponent } from './home/stagiaire/liste-question
     AjoutUtilisateurComponent,
     ListeUtilisateursComponent,
     MenuComponent,
+    QuestionComponent,
+    AjoutQuestionComponent,
     ListeQuestionnaireUserComponent
 
   ],
@@ -48,6 +53,7 @@ import { ListeQuestionnaireUserComponent } from './home/stagiaire/liste-question
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatCheckboxModule,
     MatInputModule
   ],
   providers: [RestapiService, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, AuthGuard],

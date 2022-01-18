@@ -1,6 +1,9 @@
-export interface Questionnaire {
-    idQuestionnaire: number;
-    nomQuestionnaire: string;
-    description: string;
-    dateCreation: Date;
+export class Questionnaire {
+    idQuestionnaire: number | undefined;
+    nomQuestionnaire: string | undefined;
+    description: string | undefined;
+    dateCreation: Date | undefined;
+
+  constructor() {
+  }
 }
