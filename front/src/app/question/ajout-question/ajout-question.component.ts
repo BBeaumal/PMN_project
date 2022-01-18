@@ -87,7 +87,6 @@ export class AjoutQuestionComponent implements OnInit {
       if (this.questionService.question.intitule) {
         this.intitule = this.questionService.question.intitule
       }
-      this.questionService.isCreation = false;
     }
   }
 
@@ -134,6 +133,7 @@ export class AjoutQuestionComponent implements OnInit {
           }
         })
       })
+      this.questionService.isCreation = false;
     }
 
     this.question.intitule = form.value['intitule'];
