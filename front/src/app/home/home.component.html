@@ -1,5 +1,9 @@
-<div class="main">
-    <app-liste-utilisateurs class="container" *ngIf="!utilisateurService.isCreation"></app-liste-utilisateurs>
+<div class="main" *ngIf="isAdmin">
+  <app-liste-utilisateurs class="container" *ngIf="!utilisateurService.isCreation"></app-liste-utilisateurs>
 
-    <app-ajout-utilisateur class="container" *ngIf="utilisateurService.isCreation"></app-ajout-utilisateur>
+  <app-ajout-utilisateur class="container" *ngIf="utilisateurService.isCreation"></app-ajout-utilisateur>
+</div>
+
+<div class="main" *ngIf="!isAdmin">
+  <app-liste-questionnaire-user class="container card-list"></app-liste-questionnaire-user>
 </div>
