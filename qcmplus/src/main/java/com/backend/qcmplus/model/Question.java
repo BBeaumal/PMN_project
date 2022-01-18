@@ -22,7 +22,7 @@ public class Question implements Serializable {
     private Long idQuestion;
     private String intitule;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reponse> reponses;
 
     @JsonBackReference

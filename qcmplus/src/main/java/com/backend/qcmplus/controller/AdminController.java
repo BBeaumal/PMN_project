@@ -2,7 +2,9 @@ package com.backend.qcmplus.controller;
 
 import com.backend.qcmplus.model.Question;
 import com.backend.qcmplus.model.Questionnaire;
+import com.backend.qcmplus.model.Reponse;
 import com.backend.qcmplus.model.Utilisateur;
+import com.backend.qcmplus.repository.ReponseRepository;
 import com.backend.qcmplus.service.QuestionService;
 import com.backend.qcmplus.service.QuestionnaireService;
 import com.backend.qcmplus.service.UtilisateurService;
@@ -17,6 +19,7 @@ import reactor.core.publisher.Mono;
 import javax.transaction.Transactional;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +39,9 @@ public class AdminController {
 
     @Autowired
     private QuestionService questionService;
+
+    @Autowired
+    private ReponseRepository reponseRepository;
 
     // Save
     @Transactional
@@ -137,8 +143,15 @@ public class AdminController {
     // @ResponseStatus(HttpStatus.CREATED)
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/question")
+    @Transactional
     Mono<Question> newQuestion(@RequestBody Question newQuestion) {
-        return Mono.just(questionService.saveQuestion(newQuestion));
+
+
+        Question question = questionService.saveQuestion(newQuestion);
+        for (Reponse reponse : question.getReponses()){
+            reponse.setQuestion(question);
+        }
+        return Mono.just(questionService.saveQuestion(question));
     }
 
     // Save or update Question

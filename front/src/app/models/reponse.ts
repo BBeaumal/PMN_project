@@ -1,8 +1,15 @@
+import {QuestionBean} from "./questionBean";
+
 export class Reponse {
     libelle: string;
     isCorrect: boolean;
-    constructor(libelle: string, isCorrect: boolean) {
-        this.libelle = libelle;
-        this.isCorrect = isCorrect;
-    }
+    idReponse: any;
+    question: any;
+
+  constructor(libelle: string, isCorrect: boolean, idReponse: any) {
+    this.libelle = libelle;
+    this.isCorrect = isCorrect;
+    this.idReponse = idReponse;
+  }
+
 }
