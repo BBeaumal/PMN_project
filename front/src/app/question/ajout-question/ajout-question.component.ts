@@ -6,6 +6,7 @@ import { Question } from 'src/app/models/question';
 import { Questionnaire } from 'src/app/models/questionnaire';
 import { Reponse } from 'src/app/models/reponse';
 import { QuestionService } from 'src/app/services/question.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ajout-question',
@@ -15,7 +16,8 @@ import { QuestionService } from 'src/app/services/question.service';
 
 export class AjoutQuestionComponent implements OnInit {
 
-  isChecked1: boolean;
+  intitule: string;
+  isChecked1: boolean = false;
   isChecked2: boolean = false;
   isChecked3: boolean = false;
   isChecked4: boolean = false;
@@ -30,8 +32,9 @@ export class AjoutQuestionComponent implements OnInit {
   private question = {} as Question;
   hide = true;
 
-  constructor(private http: HttpClient, private questionService: QuestionService) {
-    this.isChecked1 = false;
+  constructor(private http: HttpClient, private questionService: QuestionService,
+    private router: Router) {
+    this.intitule = "";
     this.libelleReponse1 = "";
     this.libelleReponse2 = "";
     this.libelleReponse3 = "";
@@ -47,35 +50,43 @@ export class AjoutQuestionComponent implements OnInit {
           switch (index) {
             case 0: {
               this.libelleReponse1 = value.libelle
+              this.isChecked1 = value.isCorrect
               break;
             }
             case 1: {
               this.libelleReponse2 = value.libelle
+              this.isChecked2 = value.isCorrect
               break;
             }
 
             case 2: {
               this.libelleReponse3 = value.libelle
+              this.isChecked3 = value.isCorrect
               break;
             }
 
             case 3: {
               this.libelleReponse4 = value.libelle
+              this.isChecked4 = value.isCorrect
               break;
             }
 
             case 4: {
               this.libelleReponse5 = value.libelle
+              this.isChecked5 = value.isCorrect
               break;
             }
           }
         }
       )
+      if (this.questionService.question.intitule) {
+        this.intitule = this.questionService.question.intitule
+      }
+      this.questionService.isCreation = false;
     }
   }
 
   onSubmit(form: NgForm) {
-
     let tab: Reponse[] = [];
     tab.push(new Reponse(this.libelleReponse1, this.isChecked1),
       new Reponse(this.libelleReponse2, this.isChecked2),
@@ -92,6 +103,7 @@ export class AjoutQuestionComponent implements OnInit {
     console.log(this.question);
     this.http.post<Question>('http://localhost:8080/admin/rest/question',
       this.question).subscribe();
+    this.router.navigate(["/questions"]);
   }
 
   toggle($event: MatCheckboxChange, numeroReponse: number) {

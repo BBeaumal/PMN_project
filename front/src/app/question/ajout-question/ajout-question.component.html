@@ -5,7 +5,7 @@
 
         <mat-form-field appearance="outline">
             <mat-label>Intitule</mat-label>
-            <input name="intitule" matInput placeholder="intitule" ngModel required>
+            <input name="intitule" type="text" matInput placeholder="intitule" [(ngModel)]="intitule" required>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -51,7 +51,7 @@
 
 
         <div>
-            <button mat-raised-button color="warn" class="cancel">Annuler</button>
+            <button mat-raised-button color="warn" routerLink="/questions">Annuler</button>
             <button mat-raised-button color="primary" type="submit">Créer</button>
         </div>
 
