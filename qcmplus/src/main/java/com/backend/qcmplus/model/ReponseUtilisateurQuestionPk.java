@@ -21,4 +21,6 @@ public class ReponseUtilisateurQuestionPk implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_question")
     private Question question;
+
+    private Long numeroTentative;
 }

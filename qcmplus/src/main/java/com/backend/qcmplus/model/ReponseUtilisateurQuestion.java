@@ -21,4 +21,8 @@ public class ReponseUtilisateurQuestion implements Serializable {
 
     private int reponse;
 
+    private String dateRealisation;
+
+    private String dateFin;
+
 }
