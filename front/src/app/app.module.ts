@@ -26,6 +26,9 @@ import { ListeQuestionnaireUserComponent } from './home/stagiaire/liste-question
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {QuestionComponent} from "./question/question.component";
 import {AjoutQuestionComponent} from "./question/ajout-question/ajout-question.component";
+import { RealiserQuestionnaireComponent } from './home/stagiaire/realiser-questionnaire/realiser-questionnaire.component';
+import { EllipsifyMeDirective } from './home/stagiaire/ellipsify-me.directive';
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -40,7 +43,9 @@ import {AjoutQuestionComponent} from "./question/ajout-question/ajout-question.c
     MenuComponent,
     QuestionComponent,
     AjoutQuestionComponent,
-    ListeQuestionnaireUserComponent
+    ListeQuestionnaireUserComponent,
+    RealiserQuestionnaireComponent,
+    EllipsifyMeDirective
 
   ],
   imports: [
@@ -56,7 +61,7 @@ import {AjoutQuestionComponent} from "./question/ajout-question/ajout-question.c
     MatCheckboxModule,
     MatInputModule
   ],
-  providers: [RestapiService, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, AuthGuard],
+  providers: [RestapiService, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, AuthGuard, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

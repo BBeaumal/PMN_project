@@ -1,4 +1,3 @@
-import {QuestionBean} from "./questionBean";
 
 export class Reponse {
     libelle: string;

@@ -6,7 +6,6 @@ import { Question } from 'src/app/models/question';
 import { Questionnaire } from 'src/app/models/questionnaire';
 import { Reponse } from 'src/app/models/reponse';
 import { QuestionService } from 'src/app/services/question.service';
-import {QuestionBean} from "../../models/questionBean";
 import {Router} from "@angular/router";
 import {QuestionnaireService} from "../../services/questionnaire.service";
 
