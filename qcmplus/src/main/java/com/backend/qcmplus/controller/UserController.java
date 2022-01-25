@@ -1,12 +1,9 @@
 package com.backend.qcmplus.controller;
 
 
-import com.backend.qcmplus.model.ParcoursBean;
+import com.backend.qcmplus.model.*;
 import com.backend.qcmplus.bean.QuestionnaireBean;
 
-import com.backend.qcmplus.model.Question;
-import com.backend.qcmplus.model.Questionnaire;
-import com.backend.qcmplus.model.ReponseUtilisateurQuestion;
 import com.backend.qcmplus.service.QuestionService;
 import com.backend.qcmplus.service.QuestionnaireService;
 import com.backend.qcmplus.service.ReponseUtilisateurQuestionService;
@@ -15,10 +12,7 @@ import com.backend.qcmplus.utils.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
@@ -39,9 +33,6 @@ public class UserController {
 
     @Autowired
     private QuestionnaireService surveyService;
-
-    @Autowired
-    private UtilisateurService utilisateurService;
 
     @Autowired
     private QuestionService questionService;
@@ -143,7 +134,6 @@ public class UserController {
         return Mono.just(reponseUtilisateurQuestionService.listAllQuestionsByUtilisateur(id));
     }*/
 
-}
 
     @Transactional
     @PostMapping("/questionnaire/repondre")

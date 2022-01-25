@@ -19,8 +19,6 @@ import { MatInputModule } from "@angular/material/input";
 import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
 import { AjoutQuestionnaireComponent } from './questionnaire/ajout-questionnaire/ajout-questionnaire.component';
 import { ListeQuestionnaireComponent } from './questionnaire/liste-questionnaire/liste-questionnaire.component';
-import { AjoutUtilisateurComponent } from './home/ajout-utilisateur/ajout-utilisateur.component';
-import { ListeUtilisateursComponent } from './home/liste-utilisateurs/liste-utilisateurs.component';
 import { MenuComponent } from './menu/menu.component';
 import { ListeQuestionnaireUserComponent } from './home/stagiaire/liste-questionnaire-user/liste-questionnaire-user.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -30,6 +28,8 @@ import { ParcoursComponent } from './parcours/parcours.component';
 import { RealiserQuestionnaireComponent } from './home/stagiaire/realiser-questionnaire/realiser-questionnaire.component';
 import { EllipsifyMeDirective } from './home/stagiaire/ellipsify-me.directive';
 import {DatePipe} from "@angular/common";
+import {AjoutUtilisateurComponent} from "./home/admin/ajout-utilisateur/ajout-utilisateur.component";
+import {ListeUtilisateursComponent} from "./home/admin/liste-utilisateurs/liste-utilisateurs.component";
 
 
 @NgModule({
