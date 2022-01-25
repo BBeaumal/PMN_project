@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @RestController
@@ -77,18 +75,22 @@ public class UserController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Questionnaire> liste = surveyService.listAllSurvey();
         List<ParcoursBean> notesQuestionnaireList= new ArrayList<>();
-        for(Questionnaire questionnaire : liste){
-            notesQuestionnaireList.add(noteOneQuestionnaire(questionnaire.getIdQuestionnaire()));
+        if (principal instanceof UserDetails) {
+            for (Questionnaire questionnaire : liste) {
+                notesQuestionnaireList.add(noteOneQuestionnaire(questionnaire.getIdQuestionnaire()));
+            }
+            if (notesQuestionnaireList.isEmpty()) {
+                throw new Exception("pas de questionnaire");
+            }
+            return notesQuestionnaireList;
         }
-        if(notesQuestionnaireList.isEmpty()){
-            throw new Exception("pas de questionnaire");
-        }
-        return notesQuestionnaireList;
+        return new ArrayList<>();
     }
 
     @GetMapping("/questionnaire/{idQuestionnaire}/parcours")
     public ParcoursBean noteOneQuestionnaire(@PathVariable Long idQuestionnaire) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(principal);
         List<ReponseUtilisateurQuestion> listeQuestionsRepondues = reponseUtilisateurQuestionService.listAllReponsesFromLastTentative(idQuestionnaire);
         double note = 0;
         ParcoursBean parcoursBean = new ParcoursBean();
@@ -135,7 +137,7 @@ public class UserController {
     @PostMapping("/questionnaire/repondre")
     void saveNewUser(@RequestBody QuestionnaireBean questionnaire) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = "";
+        String username;
         if (principal instanceof UserDetails) {
             username = ((UserDetails)principal).getUsername();
         } else {
