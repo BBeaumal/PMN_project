@@ -1,5 +1,6 @@
 package com.backend.qcmplus.controller;
 
+import com.backend.qcmplus.bean.QuestionnaireBean;
 import com.backend.qcmplus.model.Question;
 import com.backend.qcmplus.model.Questionnaire;
 import com.backend.qcmplus.model.Utilisateur;
@@ -9,9 +10,12 @@ import com.backend.qcmplus.service.UtilisateurService;
 import com.backend.qcmplus.utils.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +26,9 @@ public class UserController {
 
     @Autowired
     private QuestionnaireService surveyService;
+
+    @Autowired
+    private UtilisateurService utilisateurService;
 
     @Autowired
     private QuestionService questionService;
@@ -49,6 +56,7 @@ public class UserController {
         Optional<Questionnaire> foundSurvey = surveyService.findById(id);
         if (foundSurvey.isEmpty())
             throw new UserNotFoundException(id);
+        foundSurvey.get().getListeQuestion().forEach(question -> question.getReponses().forEach(reponse -> reponse.setIsCorrect(null)));
         return Mono.just(foundSurvey.get());
     }
 
@@ -59,5 +67,19 @@ public class UserController {
         if (foundQuestion.isEmpty())
             throw new UserNotFoundException(id);
         return Mono.just(foundQuestion.get());
+    }
+
+    @Transactional
+    @PostMapping("/questionnaire/repondre")
+    void saveNewUser(@RequestBody QuestionnaireBean questionnaire) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = "";
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        Utilisateur utilisateur = utilisateurService.getUtilisateurByLogin(username);
+        surveyService.addAnswer(questionnaire, utilisateur);
     }
 }
