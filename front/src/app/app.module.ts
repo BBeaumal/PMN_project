@@ -22,6 +22,7 @@ import { ListeQuestionnaireComponent } from './questionnaire/liste-questionnaire
 import { AjoutUtilisateurComponent } from './home/ajout-utilisateur/ajout-utilisateur.component';
 import { ListeUtilisateursComponent } from './home/liste-utilisateurs/liste-utilisateurs.component';
 import { MenuComponent } from './menu/menu.component';
+import { ListeQuestionnaireUserComponent } from './home/stagiaire/liste-questionnaire-user/liste-questionnaire-user.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { QuestionComponent } from "./question/question.component";
 import { AjoutQuestionComponent } from "./question/ajout-question/ajout-question.component";
@@ -40,6 +41,7 @@ import { ParcoursComponent } from './parcours/parcours.component';
     MenuComponent,
     QuestionComponent,
     AjoutQuestionComponent,
+    ListeQuestionnaireUserComponent
     ParcoursComponent
 
   ],
