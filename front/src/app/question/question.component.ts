@@ -22,7 +22,6 @@ export class QuestionComponent implements OnInit {
 
   ngOnInit(): void {
     this.restapiService.questionsList(this.questionnaireService.questionnaire.idQuestionnaire).subscribe(utilisateurs => this.questions.data = utilisateurs);
-    console.log("test")
   }
 
   deleteQuestion(question: Question) {

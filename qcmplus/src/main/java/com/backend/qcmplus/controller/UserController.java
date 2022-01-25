@@ -1,6 +1,9 @@
 package com.backend.qcmplus.controller;
 
+
 import com.backend.qcmplus.model.ParcoursBean;
+import com.backend.qcmplus.bean.QuestionnaireBean;
+
 import com.backend.qcmplus.model.Question;
 import com.backend.qcmplus.model.Questionnaire;
 import com.backend.qcmplus.model.ReponseUtilisateurQuestion;
@@ -19,6 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
+import org.springframework.http.HttpStatus;
+
+import javax.transaction.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +39,9 @@ public class UserController {
 
     @Autowired
     private QuestionnaireService surveyService;
+
+    @Autowired
+    private UtilisateurService utilisateurService;
 
     @Autowired
     private QuestionService questionService;
@@ -62,6 +72,7 @@ public class UserController {
         Optional<Questionnaire> foundSurvey = surveyService.findById(id);
         if (foundSurvey.isEmpty())
             throw new UserNotFoundException(id);
+        foundSurvey.get().getListeQuestion().forEach(question -> question.getReponses().forEach(reponse -> reponse.setIsCorrect(null)));
         return Mono.just(foundSurvey.get());
     }
 
@@ -133,3 +144,19 @@ public class UserController {
     }*/
 
 }
+
+    @Transactional
+    @PostMapping("/questionnaire/repondre")
+    void saveNewUser(@RequestBody QuestionnaireBean questionnaire) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = "";
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        Utilisateur utilisateur = utilisateurService.getUtilisateurByLogin(username);
+        surveyService.addAnswer(questionnaire, utilisateur);
+    }
+}
+

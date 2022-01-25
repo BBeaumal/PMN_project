@@ -1,3 +1,7 @@
+.flex{
+  display: flex;
+  flex-wrap: wrap;
+}
 .custom-card{
   border: 1px solid lightgrey;
   display: flex;
@@ -9,14 +13,23 @@
   box-sizing: border-box;
   align-items: center;
   margin: 5px;
+  height: 82px;
   div{
     display: flex;
     flex-direction: column;
-    overflow-wrap: anywhere;
+  }
+  .span{
+    text-decoration: underline;
   }
 }
 .icon-style{
   width: 36px;
   cursor: pointer;
   margin-left: 10px;
+}
+.elipse{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 225px;
+  white-space: nowrap;
 }

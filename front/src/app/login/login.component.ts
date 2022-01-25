@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   username="";
   password="";
+  hide: boolean = true;
 
   constructor(private service: RestapiService, private router: Router) { }
 
