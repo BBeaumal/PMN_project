@@ -4,12 +4,12 @@ import { Observable } from "rxjs";
 import { Utilisateur } from "./models/utilisateur";
 import { Questionnaire } from './models/questionnaire';
 import { Question } from './models/question';
+import { Parcours } from './models/parcours';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestapiService {
-
 
   constructor(private http: HttpClient) { }
 
@@ -30,8 +30,12 @@ export class RestapiService {
     return this.http.get<Questionnaire[]>("http://localhost:8080/admin/rest/surveys");
   }
 
+  parcoursList():Observable<Parcours[]> {
+    return this.http.get<Parcours[]>("http://localhost:8080/rest/parcours");
+  }
+
   supprimerUtilisateur(element: Utilisateur) {
-    return this.http.get("http://localhost:8080/admin/rest/user/"+element.idUtilisateur);
+    return this.http.get("http://localhost:8080/admin/rest/user/" + element.idUtilisateur);
 
   }
 }

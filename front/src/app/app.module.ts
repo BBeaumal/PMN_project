@@ -5,17 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import {RestapiService} from "./restapi.service";
-import {FormsModule} from "@angular/forms";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {TokenInterceptor} from "./token-interceptor";
-import {AuthGuard} from "./guard/AuthGuard";
+import { RestapiService } from "./restapi.service";
+import { FormsModule } from "@angular/forms";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { TokenInterceptor } from "./token-interceptor";
+import { AuthGuard } from "./guard/AuthGuard";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatTableModule} from "@angular/material/table";
-import {MatIconModule} from "@angular/material/icon";
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from "@angular/material/input";
+import { MatTableModule } from "@angular/material/table";
+import { MatIconModule } from "@angular/material/icon";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from "@angular/material/input";
 import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
 import { AjoutQuestionnaireComponent } from './questionnaire/ajout-questionnaire/ajout-questionnaire.component';
 import { ListeQuestionnaireComponent } from './questionnaire/liste-questionnaire/liste-questionnaire.component';
@@ -23,8 +23,9 @@ import { AjoutUtilisateurComponent } from './home/ajout-utilisateur/ajout-utilis
 import { ListeUtilisateursComponent } from './home/liste-utilisateurs/liste-utilisateurs.component';
 import { MenuComponent } from './menu/menu.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {QuestionComponent} from "./question/question.component";
-import {AjoutQuestionComponent} from "./question/ajout-question/ajout-question.component";
+import { QuestionComponent } from "./question/question.component";
+import { AjoutQuestionComponent } from "./question/ajout-question/ajout-question.component";
+import { ParcoursComponent } from './parcours/parcours.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {AjoutQuestionComponent} from "./question/ajout-question/ajout-question.c
     ListeUtilisateursComponent,
     MenuComponent,
     QuestionComponent,
-    AjoutQuestionComponent
+    AjoutQuestionComponent,
+    ParcoursComponent
 
   ],
   imports: [
