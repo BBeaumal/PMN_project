@@ -3,15 +3,13 @@
 
 <div class="login-form">
     <div id="formContent">
+      <h1>Connectez-vous</h1>
         <form action="login" method="get">
             <div>
                 <input type="text" id="login" matInput placeholder="Identifiant" class="fadeIn second" name="username" [(ngModel)]="username" required>
             </div>
             <div>
-                <input matInput id="password" [type]="hide ? 'password' : 'text'" name="password" placeholder="Mot de passe" maxlength="24" [(ngModel)]="password" required>
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
+                <input matInput id="password" [type]="'password'" name="password" placeholder="Mot de passe" maxlength="24" [(ngModel)]="password" required>
             </div>
             <div>
               <button class="loginButton" mat-raised-button color="primary" type="submit" (click)="login()">Se connecter</button>

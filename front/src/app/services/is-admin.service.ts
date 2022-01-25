@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 })
 export class IsAdminService {
   public isAdmin: boolean | undefined;
+  public isLogged: boolean | undefined;
 
   constructor(private http: HttpClient) { }
 

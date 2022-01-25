@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {IsAdminService} from "../services/is-admin.service";
 
 @Component({
   selector: 'app-menu',
@@ -8,12 +9,15 @@ import {Router} from "@angular/router";
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, public isAdminService: IsAdminService) {
+  }
 
   ngOnInit(): void {
   }
 
   logout() {
+    this.isAdminService.isLogged = false;
+    this.isAdminService.isAdmin = false;
     sessionStorage.removeItem("secure-pmn-token");
     this.router.navigate(['login']);
   }
