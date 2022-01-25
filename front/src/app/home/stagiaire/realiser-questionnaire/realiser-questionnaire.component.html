@@ -3,7 +3,7 @@
   <div *ngIf="index == questionnaireUserService.incrementQuestion">
     <span style="font-size: 14px; font-weight: bold;">{{question.intitule}}</span>
     <div class="user-reponse" *ngFor="let reponse of question.reponses; let indexReponse = index">
-      <mat-checkbox (change)="toggle(reponse)" class="checkbox"></mat-checkbox>
+      <mat-checkbox color="primary" (change)="toggle(reponse)" class="checkbox"></mat-checkbox>
       <span>{{reponse.libelle}}</span>
     </div>
     <button class="btn-questionnaire" mat-raised-button color="primary" (click)="next()" *ngIf="questionnaireUserService.incrementQuestion < questionnaireUserService.nbQuestions-1">Suivant</button>

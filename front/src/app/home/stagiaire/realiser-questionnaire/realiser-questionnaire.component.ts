@@ -22,6 +22,7 @@ export class RealiserQuestionnaireComponent implements OnInit {
   }
 
   valider() {
+    this.questionnaireUserService.incrementQuestion = 0;
     const date=new Date();
     // @ts-ignore
     this.questionnaireUserService.questionnaire.dateFin = this.datepipe.transform(date, 'yyyy-MM-dd HH:mm:ss');
@@ -42,6 +43,7 @@ export class RealiserQuestionnaireComponent implements OnInit {
   }
 
   quitter() {
+    this.questionnaireUserService.incrementQuestion = 0;
     this.questionnaireUserService.afficherQuestionnaire = false;
   }
 }

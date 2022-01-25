@@ -69,6 +69,12 @@ public class QuestionnaireService {
                     for (Reponse reponse : question.getReponses()){
                         if (reponse.getIsCorrect() != null){
                             isAnswered = true;
+                            Long nbBonnesReponsesBdd = reponsesBdd.stream().filter(Reponse::getIsCorrect).count();
+                            Long nbBonnesReponsesUser = question.getReponses().stream().filter(reponse1 -> reponse1.getIsCorrect() != null && reponse1.getIsCorrect()).count();
+                            if (!nbBonnesReponsesBdd.equals(nbBonnesReponsesUser)){
+                                isCorrect = false;
+                                break;
+                            }
                             for (Reponse reponseBdd : reponsesBdd){
                                 if (reponse.getIdReponse().equals(reponseBdd.getIdReponse()) && !reponseBdd.getIsCorrect()){
                                     isCorrect = false;
