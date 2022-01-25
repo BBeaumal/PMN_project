@@ -13,11 +13,16 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isAdminService.isLogged = sessionStorage.getItem("secure-pmn-token") != null;
+    this.isAdminService.isAdminFunc().subscribe({
+      next: () => {this.isAdminService.isAdmin = true},
+      error: () => {this.isAdminService.isAdmin = false},
+    });
   }
 
   logout() {
-    this.isAdminService.isLogged = false;
     this.isAdminService.isAdmin = false;
+    this.isAdminService.isLogged = false;
     sessionStorage.removeItem("secure-pmn-token");
     this.router.navigate(['login']);
   }
