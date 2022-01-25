@@ -11,6 +11,4 @@ public interface ReponseUtilisateurQuestionRepository extends JpaRepository<Repo
 
     List<ReponseUtilisateurQuestion> findAllByLinkPk_Utilisateur_IdUtilisateurOrderByLinkPkNumeroTentative(Long idUtilisateur);
 
-
-
 }

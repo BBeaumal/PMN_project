@@ -29,7 +29,7 @@ public class ReponseUtilisateurQuestionService {
     public List<ReponseUtilisateurQuestion> listAllQuestionsFromOneQuestionnaire(Long idQuestionnaire) {
         List<ReponseUtilisateurQuestion> listeQuestionsRepondues = listAllQuestions();
         listeQuestionsRepondues.removeIf(questionRepondue -> !questionRepondue.getLinkPk().getQuestion().getQuestionnaire().getIdQuestionnaire().equals(idQuestionnaire));
-        return listeQuestionsRepondues;
+    return listeQuestionsRepondues;
     }
 
     public List<ReponseUtilisateurQuestion> listAllReponsesFromLastTentative(Long idQuestionnaire){

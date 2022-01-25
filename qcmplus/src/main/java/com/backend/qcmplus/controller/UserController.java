@@ -1,5 +1,6 @@
 package com.backend.qcmplus.controller;
 
+import com.backend.qcmplus.model.ParcoursBean;
 import com.backend.qcmplus.model.Question;
 import com.backend.qcmplus.model.Questionnaire;
 import com.backend.qcmplus.model.ReponseUtilisateurQuestion;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,11 +74,28 @@ public class UserController {
         return Mono.just(foundQuestion.get());
     }
 
+    @GetMapping("/parcours")
+    public List<ParcoursBean> noterTouslesQuestionnaires() throws Exception {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Questionnaire> liste = surveyService.listAllSurvey();
+        List<ParcoursBean> notesQuestionnaireList= new ArrayList<>();
+        for(Questionnaire questionnaire : liste){
+            notesQuestionnaireList.add(noteOneQuestionnaire(questionnaire.getIdQuestionnaire()));
+        }
+        if(notesQuestionnaireList.isEmpty()){
+            throw new Exception("pas de questionnaire");
+        }
+        return notesQuestionnaireList;
+    }
+
     @GetMapping("/questionnaire/{idQuestionnaire}/parcours")
-    public double noteOneQuestionnaire(@PathVariable Long idQuestionnaire) {
+    public ParcoursBean noteOneQuestionnaire(@PathVariable Long idQuestionnaire) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<ReponseUtilisateurQuestion> listeQuestionsRepondues = reponseUtilisateurQuestionService.listAllReponsesFromLastTentative(idQuestionnaire);
         double note = 0;
+        ParcoursBean parcoursBean = new ParcoursBean();
+        Optional<Questionnaire> questionnaire = surveyService.getSurvey(idQuestionnaire);
+        parcoursBean.setNomQuestionnaire(questionnaire.get().getNomQuestionnaire());
 
         if (principal instanceof UserDetails) {
             for (ReponseUtilisateurQuestion reponseUtilisateurQuestion : listeQuestionsRepondues) {
@@ -85,9 +104,10 @@ public class UserController {
                 }
             }
             note=(note / listeQuestionsRepondues.size()) * 20;
-            return note;
+            parcoursBean.setNote(note);
+            return parcoursBean;
         }
-        return 0;
+        return new ParcoursBean();
     }
 
 /*    Mono<List<ReponseUtilisateurQuestion>> findAllReponses(@PathVariable Long id) throws UserNotFoundException {
