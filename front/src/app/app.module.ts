@@ -26,6 +26,7 @@ import { ListeQuestionnaireUserComponent } from './home/stagiaire/liste-question
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {QuestionComponent} from "./question/question.component";
 import {AjoutQuestionComponent} from "./question/ajout-question/ajout-question.component";
+import { QuestionnaireDetailsComponent } from './questionnaire-details/questionnaire-details.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {AjoutQuestionComponent} from "./question/ajout-question/ajout-question.c
     MenuComponent,
     QuestionComponent,
     AjoutQuestionComponent,
-    ListeQuestionnaireUserComponent
+    ListeQuestionnaireUserComponent,
+    QuestionnaireDetailsComponent
 
   ],
   imports: [

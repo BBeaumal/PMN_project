@@ -71,7 +71,7 @@ public class UserController {
         return Mono.just(foundQuestion.get());
     }
 
-    @GetMapping("/survey/{id}/reponse")
+    @GetMapping("/survey/{id}/reponses")
     Mono<List<ReponseUtilisateurQuestion>> findAllReponse(@PathVariable Long id) throws NotFoundException {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
