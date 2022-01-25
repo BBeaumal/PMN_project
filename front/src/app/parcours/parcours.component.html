@@ -1,0 +1,35 @@
+<table mat-table [dataSource]="parcours" class="mat-elevation-z8">
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="idParcours">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.idParcours}} </td>
+    </ng-container> 
+    
+    <!-- Nom Questionnaire Column -->
+    <ng-container matColumnDef="nomQuestionnaire">
+        <th mat-header-cell *matHeaderCellDef> Nom Questionnaire </th>
+        <td mat-cell *matCellDef="let element"> {{element.nomQuestionnaire}} </td>
+    </ng-container>
+
+    <!-- note Column -->
+    <ng-container matColumnDef="note">
+        <th mat-header-cell *matHeaderCellDef> Note </th>
+        <td mat-cell *matCellDef="let element"> {{element.note}} </td>
+    </ng-container>
+
+    <!-- dateFin Column -->
+    <ng-container matColumnDef="dateFin">
+        <th mat-header-cell *matHeaderCellDef> dateFin </th>
+        <td mat-cell *matCellDef="let element"> {{element.dateFin}} </td>
+    </ng-container>
+
+    <!-- dateRealisation Column -->
+    <ng-container matColumnDef="dateRealisation">
+        <th mat-header-cell *matHeaderCellDef> dateRealisation </th>
+        <td mat-cell *matCellDef="let element"> {{element.dateRealisation}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

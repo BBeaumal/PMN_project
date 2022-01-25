@@ -15,9 +15,6 @@ import {QuestionnaireService} from "../services/questionnaire.service";
 export class QuestionComponent implements OnInit {
 
   questions = new MatTableDataSource<Question>();
-
-
-
   displayedColumns: string[] = ['idQuestion', 'Intitule', 'Supprimer', 'Editer'];
 
   constructor(private http: HttpClient, private restapiService: RestapiService,

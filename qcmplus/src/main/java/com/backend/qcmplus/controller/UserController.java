@@ -1,21 +1,31 @@
 package com.backend.qcmplus.controller;
 
+
+import com.backend.qcmplus.model.ParcoursBean;
 import com.backend.qcmplus.bean.QuestionnaireBean;
+
 import com.backend.qcmplus.model.Question;
 import com.backend.qcmplus.model.Questionnaire;
-import com.backend.qcmplus.model.Utilisateur;
+import com.backend.qcmplus.model.ReponseUtilisateurQuestion;
 import com.backend.qcmplus.service.QuestionService;
 import com.backend.qcmplus.service.QuestionnaireService;
+import com.backend.qcmplus.service.ReponseUtilisateurQuestionService;
 import com.backend.qcmplus.service.UtilisateurService;
 import com.backend.qcmplus.utils.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
+import org.springframework.http.HttpStatus;
+
 import javax.transaction.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +33,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/rest")
 public class UserController {
+
+    @Autowired
+    private UtilisateurService utilisateurService;
 
     @Autowired
     private QuestionnaireService surveyService;
@@ -33,9 +46,12 @@ public class UserController {
     @Autowired
     private QuestionService questionService;
 
+    @Autowired
+    private ReponseUtilisateurQuestionService reponseUtilisateurQuestionService;
+
     @GetMapping("/login")
-    Mono<String> hello(){
-       return Mono.just("loged");
+    Mono<String> hello() {
+        return Mono.just("loged");
     }
 
     // Find All Survey
@@ -69,6 +85,66 @@ public class UserController {
         return Mono.just(foundQuestion.get());
     }
 
+    @GetMapping("/parcours")
+    public List<ParcoursBean> noterTouslesQuestionnaires() throws Exception {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Questionnaire> liste = surveyService.listAllSurvey();
+        List<ParcoursBean> notesQuestionnaireList= new ArrayList<>();
+        for(Questionnaire questionnaire : liste){
+            notesQuestionnaireList.add(noteOneQuestionnaire(questionnaire.getIdQuestionnaire()));
+        }
+        if(notesQuestionnaireList.isEmpty()){
+            throw new Exception("pas de questionnaire");
+        }
+        return notesQuestionnaireList;
+    }
+
+    @GetMapping("/questionnaire/{idQuestionnaire}/parcours")
+    public ParcoursBean noteOneQuestionnaire(@PathVariable Long idQuestionnaire) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<ReponseUtilisateurQuestion> listeQuestionsRepondues = reponseUtilisateurQuestionService.listAllReponsesFromLastTentative(idQuestionnaire);
+        double note = 0;
+        ParcoursBean parcoursBean = new ParcoursBean();
+        Optional<Questionnaire> questionnaire = surveyService.getSurvey(idQuestionnaire);
+        parcoursBean.setNomQuestionnaire(questionnaire.get().getNomQuestionnaire());
+
+        if (principal instanceof UserDetails) {
+            for (ReponseUtilisateurQuestion reponseUtilisateurQuestion : listeQuestionsRepondues) {
+                if (reponseUtilisateurQuestion.getReponse() == 1) {
+                    note++;
+                }
+            }
+            note=(note / listeQuestionsRepondues.size()) * 20;
+            parcoursBean.setNote(note);
+            return parcoursBean;
+        }
+        return new ParcoursBean();
+    }
+
+/*    Mono<List<ReponseUtilisateurQuestion>> findAllReponses(@PathVariable Long id) throws UserNotFoundException {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            String username = ((UserDetails)principal).getUsername();
+            System.out.println("Utilisateur : "+username);
+            Utilisateur tempUser = utilisateurService.getUtilisateurByLogin(username);
+            if ( tempUser == null )
+                System.out.println("User not found with id survey");
+            else{
+                if (tempUser.isIsadmin())
+                    System.out.println("User must not be Admin");
+                else{
+                    System.out.println("Utilisateur : "+tempUser.getIdUtilisateur()+ "  : "+tempUser.getPrenom());
+                    return Mono.just(reponseUtilisateurQuestionService.listAllQuestionsByUtilisateur(tempUser.getIdUtilisateur()));
+                }
+            }
+        } else {
+          throw new UserNotFoundException(id);
+        }
+        return Mono.just(reponseUtilisateurQuestionService.listAllQuestionsByUtilisateur(id));
+    }*/
+
+}
+
     @Transactional
     @PostMapping("/questionnaire/repondre")
     void saveNewUser(@RequestBody QuestionnaireBean questionnaire) {
@@ -83,3 +159,4 @@ public class UserController {
         surveyService.addAnswer(questionnaire, utilisateur);
     }
 }
+
