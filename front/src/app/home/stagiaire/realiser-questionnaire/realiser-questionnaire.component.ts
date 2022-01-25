@@ -26,7 +26,9 @@ export class RealiserQuestionnaireComponent implements OnInit {
     // @ts-ignore
     this.questionnaireUserService.questionnaire.dateFin = this.datepipe.transform(date, 'yyyy-MM-dd HH:mm:ss');
     this.http.post<Questionnaire>('http://localhost:8080/rest/questionnaire/repondre',
-      this.questionnaireUserService.questionnaire).subscribe();
+      this.questionnaireUserService.questionnaire).subscribe(value => {
+      this.questionnaireUserService.afficherQuestionnaire = false;
+    });
   }
 
   toggle(reponse: Reponse) {

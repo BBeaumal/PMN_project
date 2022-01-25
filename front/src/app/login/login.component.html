@@ -1,24 +1,20 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<div class="wrapper fadeInDown">
+<div class="login-form">
     <div id="formContent">
-        <!-- Tabs Titles -->
-
-        <!-- Login Form -->
         <form action="login" method="get">
             <div>
-                <input type="text" id="login" class="fadeIn second" name="username" [(ngModel)]="username"
-                    placeholder="Login">
+                <input type="text" id="login" matInput placeholder="Identifiant" class="fadeIn second" name="username" [(ngModel)]="username" required>
             </div>
             <div>
-                <input type="password" id="password" class="fadeIn third" name="password" [(ngModel)]="password"
-                    placeholder="Password">
+                <input matInput id="password" [type]="hide ? 'password' : 'text'" name="password" placeholder="Mot de passe" maxlength="24" [(ngModel)]="password" required>
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
             </div>
             <div>
-                <input type="submit" class="fadeIn fourth" value="Log In" (click)="login()">
+              <button class="loginButton" mat-raised-button color="primary" type="submit" (click)="login()">Se connecter</button>
             </div>
         </form>
 
