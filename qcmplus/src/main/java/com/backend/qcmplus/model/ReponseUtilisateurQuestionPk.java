@@ -23,5 +23,5 @@ public class ReponseUtilisateurQuestionPk implements Serializable {
     @JoinColumn(name = "id_question")
     private Question question;
 
-    private Long numeroTentative;
+    private int numeroTentative;
 }
