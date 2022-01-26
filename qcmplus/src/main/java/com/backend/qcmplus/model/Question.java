@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
 public class Question implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

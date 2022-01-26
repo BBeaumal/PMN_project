@@ -7,7 +7,9 @@ import {QuestionnaireBean} from "../../models/questionnaireBean";
 export class QuestionnaireUserService {
 
   afficherQuestionnaire: boolean = false;
+  afficherDetailQuestionnaire: boolean = false;
   questionnaire: QuestionnaireBean = {} as QuestionnaireBean;
+  idQuestionnaireDetail: number | undefined;
   nbQuestions: number = 0;
   incrementQuestion: number = 0;
 

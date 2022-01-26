@@ -13,8 +13,10 @@ public class ParcoursBean  {
 
     private Long idParcours;
 
+    private Long numTentative;
+
     private String nomQuestionnaire;
     private double note;
-    private Date dateFin;
-    private Date dateRealisation;
+    private String dateFin;
+    private String dateRealisation;
  }

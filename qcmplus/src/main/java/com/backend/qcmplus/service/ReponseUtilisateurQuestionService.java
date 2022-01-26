@@ -56,7 +56,7 @@ public class ReponseUtilisateurQuestionService {
         long numeroMax = listeQuestions
                 .stream()
                 .mapToLong(v -> v.getLinkPk().getNumeroTentative())
-                .max().orElseThrow(NoSuchElementException::new);
+                .max().orElse(0);
 
         return listeQuestions
                 .stream()

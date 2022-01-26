@@ -3,6 +3,7 @@ export class Questionnaire {
     nomQuestionnaire: string | undefined;
     description: string | undefined;
     dateCreation: Date | undefined;
+    possedeParcours: boolean = false;
 
   constructor() {
   }

@@ -22,4 +22,6 @@ public class QuestionnaireBean {
     private String dateCreation;
 
     private List<Question> listeQuestion;
+
+    private boolean possedeParcours;
 }

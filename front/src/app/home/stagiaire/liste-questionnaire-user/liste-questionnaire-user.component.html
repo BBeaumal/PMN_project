@@ -1,12 +1,13 @@
-<div class="flex" *ngIf="!questionnaireUserService.afficherQuestionnaire">
+<div class="flex" *ngIf="!questionnaireUserService.afficherQuestionnaire && !questionnaireUserService.afficherDetailQuestionnaire">
   <div *ngFor="let questionnaire of questionnaires">
-    <div class="custom-card">
+    <div [ngClass]="questionnaire.possedeParcours ? 'custom-card parcours' : 'custom-card'">
       <div style="height: 100%;">
         <span><strong class="span">Intitulé:</strong> {{questionnaire.nomQuestionnaire}}</span>
         <span>
           <strong class="span">Description:</strong>
           <p appEllipsifyMe class="elipse">{{questionnaire.description}}</p>
         </span>
+        <button *ngIf="questionnaire.possedeParcours" mat-raised-button color="primary" style="font-size: 11px;" (click)="details(questionnaire)">Voir le parcours</button>
       </div>
       <div>
         <img (click)="startQuestionnaire(questionnaire)" class="icon-style" src="assets/images/bouton-de-lecture-rond.png">
@@ -15,6 +16,10 @@
   </div>
 </div>
 
-<div style="width: 100%" *ngIf="questionnaireUserService.afficherQuestionnaire">
+<div style="width: 100%" *ngIf="questionnaireUserService.afficherQuestionnaire && !questionnaireUserService.afficherDetailQuestionnaire">
   <app-realiser-questionnaire></app-realiser-questionnaire>
+</div>
+
+<div style="width: 100%" *ngIf="questionnaireUserService.afficherDetailQuestionnaire">
+  <app-questionnaire-details></app-questionnaire-details>
 </div>

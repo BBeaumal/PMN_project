@@ -22,8 +22,9 @@ import { ListeQuestionnaireComponent } from './questionnaire/liste-questionnaire
 import { MenuComponent } from './menu/menu.component';
 import { ListeQuestionnaireUserComponent } from './home/stagiaire/liste-questionnaire-user/liste-questionnaire-user.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { QuestionComponent } from "./question/question.component";
-import { AjoutQuestionComponent } from "./question/ajout-question/ajout-question.component";
+import {QuestionComponent} from "./question/question.component";
+import {AjoutQuestionComponent} from "./question/ajout-question/ajout-question.component";
+import { QuestionnaireDetailsComponent } from './questionnaire-details/questionnaire-details.component';
 import { ParcoursComponent } from './parcours/parcours.component';
 import { RealiserQuestionnaireComponent } from './home/stagiaire/realiser-questionnaire/realiser-questionnaire.component';
 import { EllipsifyMeDirective } from './home/stagiaire/ellipsify-me.directive';
@@ -48,7 +49,8 @@ import {ListeUtilisateursComponent} from "./home/admin/liste-utilisateurs/liste-
     ParcoursComponent,
     ListeQuestionnaireUserComponent,
     RealiserQuestionnaireComponent,
-    EllipsifyMeDirective
+    EllipsifyMeDirective,
+    QuestionnaireDetailsComponent
   ],
   imports: [
     BrowserModule,
