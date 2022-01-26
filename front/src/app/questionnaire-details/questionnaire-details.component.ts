@@ -1,3 +1,4 @@
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ReponseUtilisateurQuestion } from '../models/reponseUtilisateurQuestion';
@@ -16,10 +17,43 @@ export class QuestionnaireDetailsComponent implements OnInit {
 
   constructor( private restapiService: RestapiService, public questionnaireService: QuestionnaireService) { }
 
+  
+
   ngOnInit(): void {
-    this.restapiService.getSurveyDetails_2(4).subscribe(surveyDetails => this.surveyDetails.data = surveyDetails)
-    console.log(this.surveyDetails.data);
+    
+    //getSurveyDetails(this.questionnaireService.questionnaire).subscribe
+    this.restapiService.getSurveyDetails_2(4).subscribe(surveyDetails => 
+      {
+      this.surveyDetails.data = surveyDetails;
+      this.surveyDetails.data.forEach(
+        function (value)
+          {
+            console.log("date : "+value.dateFin);
+            value.timeSpend = addTime(value.dateFin!, value.dateRealisation!);
+          }
+        )
+      }
+    )
   }
 
+}
 
+function addTime(dateFin: Date, dateRealisation: Date): string {
+
+    console.log(dateFin);
+    console.log(dateRealisation);
+    const dateA = new Date(dateFin);
+    const dateB = new Date(dateRealisation);
+
+    var timeDifference = dateA.getTime() - dateB.getTime();
+
+    var ms = timeDifference % 1000;
+    timeDifference = (timeDifference - ms) / 1000;
+    var secs = timeDifference % 60;
+    timeDifference = (timeDifference - secs) / 60;
+    var mins = timeDifference % 60;
+    var hrs = (timeDifference - mins) / 60;
+
+    console.log(hrs + ':' + mins + ':' + secs + '.' + ms);
+    return  mins + ' min :' + secs + ' secs';
 }

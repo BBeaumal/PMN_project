@@ -7,6 +7,7 @@ export class ReponseUtilisateurQuestion {
     reponse: number | undefined;
     dateRealisation: Date | undefined;
     dateFin: Date | undefined;
+    timeSpend?: string;
     
 
   constructor() {
