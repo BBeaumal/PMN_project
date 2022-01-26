@@ -16,6 +16,8 @@ import reactor.core.publisher.Mono;
 
 import javax.transaction.Transactional;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -41,8 +43,21 @@ public class UserController {
 
     // Find All Survey
     @GetMapping("/surveys")
-    Mono<List<Questionnaire>> findAllSurvey() {
-        return Mono.just(surveyService.listAllSurvey());
+    Mono<List<QuestionnaireBean>> findAllSurvey() {
+        List<Questionnaire> questionnaires = surveyService.listAllSurvey();
+        List<QuestionnaireBean> questionnaireBeanList = new ArrayList<>();
+        for (Questionnaire questionnaire : questionnaires){
+            QuestionnaireBean questionnaireBean = new QuestionnaireBean();
+            questionnaireBean.setIdQuestionnaire(questionnaire.getIdQuestionnaire());
+            questionnaireBean.setNomQuestionnaire(questionnaire.getNomQuestionnaire());
+            questionnaireBean.setDescription(questionnaire.getDescription());
+            questionnaireBean.setPossedeParcours(false);
+            if (reponseUtilisateurQuestionService.listAllReponsesFromLastTentative(questionnaire.getIdQuestionnaire()).size() > 0){
+                questionnaireBean.setPossedeParcours(true);
+            }
+            questionnaireBeanList.add(questionnaireBean);
+        }
+        return Mono.just(questionnaireBeanList);
     }
 
     // Find All Question
@@ -99,6 +114,8 @@ public class UserController {
 
         if (principal instanceof UserDetails) {
             for (ReponseUtilisateurQuestion reponseUtilisateurQuestion : listeQuestionsRepondues) {
+                parcoursBean.setDateRealisation(reponseUtilisateurQuestion.getDateRealisation());
+                parcoursBean.setDateFin(reponseUtilisateurQuestion.getDateFin());
                 if (reponseUtilisateurQuestion.getReponse() == 1) {
                     note++;
                 }
@@ -108,6 +125,40 @@ public class UserController {
             return parcoursBean;
         }
         return new ParcoursBean();
+    }
+
+    @GetMapping("/survey/{idQuestionnaire}/reponses")
+    public List<ParcoursBean> notesQuestionnaire(@PathVariable Long idQuestionnaire) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(principal);
+        List<ReponseUtilisateurQuestion> listeQuestionsRepondues = reponseUtilisateurQuestionService.listAllQuestionsFromOneQuestionnaire(idQuestionnaire);
+        Map<Long, List<ReponseUtilisateurQuestion>> listeQuestionsReponduesGroupedByTentatives =
+                listeQuestionsRepondues
+                .stream()
+                .collect(Collectors.groupingBy(w -> w.getLinkPk().getNumeroTentative()));
+
+        List<ParcoursBean> parcoursBeanList = new ArrayList<>();
+        Optional<Questionnaire> questionnaire = surveyService.getSurvey(idQuestionnaire);
+        for (var entry : listeQuestionsReponduesGroupedByTentatives.entrySet()) {
+            double note = 0;
+            ParcoursBean parcoursBean = new ParcoursBean();
+            parcoursBean.setNomQuestionnaire(questionnaire.get().getNomQuestionnaire());
+            parcoursBean.setNumTentative(entry.getKey());
+            if (principal instanceof UserDetails) {
+                for (ReponseUtilisateurQuestion reponseUtilisateurQuestion : entry.getValue()) {
+                    parcoursBean.setDateRealisation(reponseUtilisateurQuestion.getDateRealisation());
+                    parcoursBean.setDateFin(reponseUtilisateurQuestion.getDateFin());
+                    if (reponseUtilisateurQuestion.getReponse() == 1) {
+                        note++;
+                    }
+                }
+                note=(note / entry.getValue().size()) * 20;
+                parcoursBean.setNote(note);
+                parcoursBeanList.add(parcoursBean);
+            }
+        }
+
+        return parcoursBeanList;
     }
 
 /*    Mono<List<ReponseUtilisateurQuestion>> findAllReponses(@PathVariable Long id) throws UserNotFoundException {

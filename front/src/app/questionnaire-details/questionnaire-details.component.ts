@@ -1,9 +1,10 @@
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { ReponseUtilisateurQuestion } from '../models/reponseUtilisateurQuestion';
 import { RestapiService } from '../restapi.service';
 import { QuestionnaireService } from '../services/questionnaire.service';
+import {QuestionnaireUserService} from "../home/service/questionnaire-user.service";
+import {Parcours} from "../models/parcours";
 
 @Component({
   selector: 'app-questionnaire-details',
@@ -12,17 +13,17 @@ import { QuestionnaireService } from '../services/questionnaire.service';
 })
 export class QuestionnaireDetailsComponent implements OnInit {
 
-  surveyDetails = new MatTableDataSource<ReponseUtilisateurQuestion>();
-  displayedColumns: string[] = ['Num Tentative', 'Temps passé', 'Date de réalisation'];
+  surveyDetails = new MatTableDataSource<Parcours>();
+  displayedColumns: string[] = ['Num Tentative', 'Temps passé', 'Date de réalisation', 'Note'];
 
-  constructor( private restapiService: RestapiService, public questionnaireService: QuestionnaireService) { }
+  constructor( private restapiService: RestapiService, public questionnaireService: QuestionnaireService, public questionnaireUserService: QuestionnaireUserService) { }
 
-  
+
 
   ngOnInit(): void {
-    
+
     //getSurveyDetails(this.questionnaireService.questionnaire).subscribe
-    this.restapiService.getSurveyDetails_2(4).subscribe(surveyDetails => 
+    this.restapiService.getSurveyDetails_2(this.questionnaireUserService.idQuestionnaireDetail).subscribe(surveyDetails =>
       {
       this.surveyDetails.data = surveyDetails;
       this.surveyDetails.data.forEach(
@@ -36,12 +37,12 @@ export class QuestionnaireDetailsComponent implements OnInit {
     )
   }
 
+  retour() {
+    window.location.href = "/";
+  }
 }
 
 function addTime(dateFin: Date, dateRealisation: Date): string {
-
-    console.log(dateFin);
-    console.log(dateRealisation);
     const dateA = new Date(dateFin);
     const dateB = new Date(dateRealisation);
 
@@ -54,6 +55,15 @@ function addTime(dateFin: Date, dateRealisation: Date): string {
     var mins = timeDifference % 60;
     var hrs = (timeDifference - mins) / 60;
 
-    console.log(hrs + ':' + mins + ':' + secs + '.' + ms);
-    return  mins + ' min :' + secs + ' secs';
+    let affichage:string = "";
+    if (hrs != 0){
+      affichage += hrs + ' heure(s) ';
+    }
+    if (mins != 0){
+      affichage += mins + ' minutes(s) ';
+    }
+    if (secs != 0){
+      affichage += secs + ' seconde(s) ';
+    }
+    return affichage;
 }

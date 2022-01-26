@@ -31,4 +31,10 @@ export class ListeQuestionnaireUserComponent implements OnInit {
       this.questionnaireUserService.questionnaire.dateFormulaire = this.datepipe.transform(this.date, 'yyyy-MM-dd HH:mm:ss');
     })
   }
+
+  details(questionnaire: Questionnaire) {
+    this.questionnaireUserService.afficherQuestionnaire = false;
+    this.questionnaireUserService.afficherDetailQuestionnaire = true;
+    this.questionnaireUserService.idQuestionnaireDetail = questionnaire.idQuestionnaire;
+  }
 }

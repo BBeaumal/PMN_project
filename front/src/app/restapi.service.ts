@@ -45,8 +45,8 @@ export class RestapiService {
     return this.http.get<ReponseUtilisateurQuestion[]>("http://localhost:8080/rest/survey/"+ questionnaire.idQuestionnaire+"/reponses")
   }
 
-  getSurveyDetails_2(idQuestionnaire: number) : Observable<ReponseUtilisateurQuestion[]>
+  getSurveyDetails_2(idQuestionnaire: number | undefined) : Observable<Parcours[]>
   {
-    return this.http.get<ReponseUtilisateurQuestion[]>("http://localhost:8080/rest/survey/"+ idQuestionnaire+"/reponses")
+    return this.http.get<Parcours[]>("http://localhost:8080/rest/survey/"+idQuestionnaire+"/reponses")
   }
 }

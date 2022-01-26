@@ -25,8 +25,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import {QuestionComponent} from "./question/question.component";
 import {AjoutQuestionComponent} from "./question/ajout-question/ajout-question.component";
 import { QuestionnaireDetailsComponent } from './questionnaire-details/questionnaire-details.component';
-import { QuestionComponent } from "./question/question.component";
-import { AjoutQuestionComponent } from "./question/ajout-question/ajout-question.component";
 import { ParcoursComponent } from './parcours/parcours.component';
 import { RealiserQuestionnaireComponent } from './home/stagiaire/realiser-questionnaire/realiser-questionnaire.component';
 import { EllipsifyMeDirective } from './home/stagiaire/ellipsify-me.directive';
