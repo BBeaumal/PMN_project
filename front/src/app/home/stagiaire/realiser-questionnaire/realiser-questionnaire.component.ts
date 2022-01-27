@@ -22,14 +22,17 @@ export class RealiserQuestionnaireComponent implements OnInit {
   }
 
   valider() {
-    this.questionnaireUserService.incrementQuestion = 0;
-    const date=new Date();
-    // @ts-ignore
-    this.questionnaireUserService.questionnaire.dateFin = this.datepipe.transform(date, 'yyyy-MM-dd HH:mm:ss');
-    this.http.post<Questionnaire>('http://localhost:8080/rest/questionnaire/repondre',
-      this.questionnaireUserService.questionnaire).subscribe(value => {
-      this.questionnaireUserService.afficherQuestionnaire = false;
-    });
+    if (confirm("Voulez-vous valider ce parcours ?"))
+    {
+      this.questionnaireUserService.incrementQuestion = 0;
+      const date=new Date();
+      // @ts-ignore
+      this.questionnaireUserService.questionnaire.dateFin = this.datepipe.transform(date, 'yyyy-MM-dd HH:mm:ss');
+      this.http.post<Questionnaire>('http://localhost:8080/rest/questionnaire/repondre',
+        this.questionnaireUserService.questionnaire).subscribe(value => {
+        this.questionnaireUserService.afficherQuestionnaire = false;
+      });
+    }
   }
 
   toggle(reponse: Reponse) {
@@ -43,7 +46,10 @@ export class RealiserQuestionnaireComponent implements OnInit {
   }
 
   quitter() {
-    this.questionnaireUserService.incrementQuestion = 0;
-    this.questionnaireUserService.afficherQuestionnaire = false;
+    if (confirm(" /!\\ Vous allze quitter un questionnaire en cours"))
+    {
+      this.questionnaireUserService.incrementQuestion = 0;
+      this.questionnaireUserService.afficherQuestionnaire = false;
+    }
   }
 }
