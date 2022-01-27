@@ -1,0 +1,20 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="login-form">
+    <div id="formContent">
+      <h1>Connectez-vous</h1>
+        <form action="login" method="get">
+            <div>
+                <input type="text" id="login" matInput placeholder="Identifiant" class="fadeIn second" name="username" [(ngModel)]="username" required>
+            </div>
+            <div>
+                <input matInput id="password" [type]="'password'" name="password" placeholder="Mot de passe" maxlength="24" [(ngModel)]="password" required>
+            </div>
+            <div>
+              <button class="loginButton" mat-raised-button color="primary" type="submit" (click)="login()">Se connecter</button>
+            </div>
+        </form>
+
+    </div>
+</div>

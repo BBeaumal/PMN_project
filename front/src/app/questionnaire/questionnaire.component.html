@@ -1,0 +1,5 @@
+<div class="main">
+    <app-liste-questionnaire class="container" *ngIf="!questionnaireService.isCreation"></app-liste-questionnaire>
+
+    <app-ajout-questionnaire class="container row" *ngIf="questionnaireService.isCreation"></app-ajout-questionnaire>
+</div>

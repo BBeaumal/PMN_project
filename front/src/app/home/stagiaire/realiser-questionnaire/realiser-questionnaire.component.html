@@ -1,0 +1,13 @@
+<h2>Questionnaire - {{questionnaireUserService.questionnaire.nomQuestionnaire}}</h2>
+<div style="width: 100%" *ngFor="let question of questionnaireUserService.questionnaire.listeQuestion; let index = index">
+  <div *ngIf="index == questionnaireUserService.incrementQuestion">
+    <span style="font-size: 14px; font-weight: bold;">{{question.intitule}}</span>
+    <div class="user-reponse" *ngFor="let reponse of question.reponses; let indexReponse = index">
+      <mat-checkbox color="primary" (change)="toggle(reponse)" class="checkbox"></mat-checkbox>
+      <span>{{reponse.libelle}}</span>
+    </div>
+    <button class="btn-questionnaire" mat-raised-button color="primary" (click)="next()" *ngIf="questionnaireUserService.incrementQuestion < questionnaireUserService.nbQuestions-1">Suivant</button>
+    <button class="btn-questionnaire" (click)="valider()" mat-raised-button color="primary" *ngIf="questionnaireUserService.incrementQuestion == questionnaireUserService.nbQuestions-1">Valider</button>
+    <button class="btn-questionnaire" (click)="quitter()" mat-raised-button color="primary">Quitter</button>
+  </div>
+</div>

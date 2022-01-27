@@ -1,0 +1,39 @@
+.flex{
+  display: flex;
+  flex-wrap: wrap;
+}
+.custom-card{
+  border: 1px solid lightgrey;
+  display: flex;
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  width: 300px;
+  justify-content: space-between;
+  box-sizing: border-box;
+  align-items: center;
+  margin: 5px;
+  height: 82px;
+ // height: 129px;
+  div{
+    display: flex;
+    flex-direction: column;
+  }
+  .span{
+    text-decoration: underline;
+  }
+}
+.icon-style{
+  width: 36px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.elipse{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 225px;
+  white-space: nowrap;
+}
+.parcours{
+  height: 129px;
+}

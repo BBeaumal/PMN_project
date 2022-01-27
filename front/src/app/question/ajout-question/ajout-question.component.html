@@ -1,0 +1,59 @@
+<h2>Création d'une question</h2>
+<div>
+    <form class="column" ngNativeValidate (ngSubmit)="onSubmit(form)" #form="ngForm">
+
+
+        <mat-form-field appearance="outline">
+            <mat-label>Intitule</mat-label>
+            <input name="intitule" type="text" matInput placeholder="intitule" [(ngModel)]="intitule" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Reponse 1</mat-label>
+            <input type="text" name="1" placeholder="Reponse 1" maxlength="32" [(ngModel)]="libelleReponse1" required
+                (ngModelChange)="checkInput()" matInput>
+            <mat-checkbox color="primary" class="1" [checked]="isChecked1" (change)="toggle($event,1)"
+                [disabled]="libelleReponse1.length==0"></mat-checkbox>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Reponse 2</mat-label>
+            <input type="text" name="2" placeholder="Reponse 2" maxlength="32" [(ngModel)]="libelleReponse2"
+                (ngModelChange)="checkInput()" required matInput>
+            <mat-checkbox color="primary" class="2" [checked]="isChecked2" (change)="toggle($event,2)"
+                [disabled]="libelleReponse2.length==0"></mat-checkbox>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Reponse 3</mat-label>
+            <input type="text" name="3" placeholder="Reponse 3" maxlength="32" [(ngModel)]="libelleReponse3"
+                (ngModelChange)="checkInput()" matInput>
+            <mat-checkbox color="primary" class="4" [checked]="isChecked3" (change)="toggle($event,3)"
+                [disabled]="libelleReponse3.length==0"></mat-checkbox>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Reponse 4</mat-label>
+            <input type="text" name="4" placeholder="Reponse 4" maxlength="32" [(ngModel)]="libelleReponse4"
+                (ngModelChange)="checkInput()" matInput>
+            <mat-checkbox color="primary" class="5" [checked]="isChecked4" (change)="toggle($event,4)"
+                [disabled]="libelleReponse4.length==0"></mat-checkbox>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Reponse 5</mat-label>
+            <input type="text" name="5" placeholder="Reponse 5" maxlength="32" [(ngModel)]="libelleReponse5"
+                (ngModelChange)="checkInput()" matInput>
+            <mat-checkbox color="primary" class="5" [checked]="isChecked5" (change)="toggle($event,5)"
+                [disabled]="libelleReponse5.length==0"></mat-checkbox>
+        </mat-form-field>
+
+
+
+        <div style="margin-bottom: 50px;margin-top: 25px;display: flex;justify-content: center;">
+            <button class="btn-ajout-question" mat-raised-button color="warn" (click)="cancel()">Annuler</button>
+            <button class="btn-ajout-question" mat-raised-button color="primary" type="submit">Créer</button>
+        </div>
+
+    </form>
+</div>

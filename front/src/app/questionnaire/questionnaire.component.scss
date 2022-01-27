@@ -1,0 +1,19 @@
+.main {
+  display: flex;
+  justify-content: center;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1200px;
+  background: white;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px 0 #aaaaaa;
+}
+
+.row {
+  flex-direction: row;
+  width: 960px;
+}
