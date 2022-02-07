@@ -19,11 +19,15 @@ import org.springframework.security.core.GrantedAuthority;
 public class CustomUserDetails implements UserDetails {
 
     /**
-     *
+     * Spring security config
      */
     private static final long serialVersionUID = 1256711395932122675L;
     private Utilisateur utilisateur;
 
+    /**
+     *
+     * @return role from user
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 

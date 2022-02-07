@@ -24,33 +24,37 @@ public class ReponseUtilisateurQuestionService {
     @Autowired
     UtilisateurService utilisateurService;
 
-    //TODO: Find a better place for this method
-    public Utilisateur getCurrentUtilisateur() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username;
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
-        } else {
-           throw new UsernameNotFoundException("username not found");
-        }
-        return utilisateurService.getUtilisateurByLogin(username);
-    }
 
     public List<ReponseUtilisateurQuestion> listAllQuestions(){
         return repository.findAll();
     }
 
+    /**
+     * retrieve all answered answers for a specific user
+     * @param idUser is the Id of the User
+     * @return a list of answered answers
+     */
     public List<ReponseUtilisateurQuestion> listAllQuestionsByUtilisateur(Long idUser){
         return repository.findAllByLinkPk_Utilisateur_IdUtilisateurOrderByLinkPkNumeroTentative(idUser);
     }
 
+    /**
+     * retrieve all answered answers for a specific survey
+     * @param idQuestionnaire is the id of survey
+     * @return a list of answered answer for a survey
+     */
     public List<ReponseUtilisateurQuestion> listAllQuestionsFromOneQuestionnaire(Long idQuestionnaire) {
-        Utilisateur utilisateur = getCurrentUtilisateur();
+        Utilisateur utilisateur = utilisateurService.getCurrentUtilisateur();
         List<ReponseUtilisateurQuestion> listeQuestionsRepondues =listAllQuestionsByUtilisateur(utilisateur.getIdUtilisateur());
         listeQuestionsRepondues.removeIf(questionRepondue -> !questionRepondue.getLinkPk().getQuestion().getQuestionnaire().getIdQuestionnaire().equals(idQuestionnaire));
     return listeQuestionsRepondues;
     }
 
+    /**
+     *
+     * @param idQuestionnaire is id of a survey
+     * @return all answered answer from the last attempt for a survey
+     */
     public List<ReponseUtilisateurQuestion> listAllReponsesFromLastTentative(Long idQuestionnaire){
         List<ReponseUtilisateurQuestion> listeQuestions = listAllQuestionsFromOneQuestionnaire(idQuestionnaire);
         long numeroMax = listeQuestions
