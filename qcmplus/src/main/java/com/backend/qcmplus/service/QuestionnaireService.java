@@ -24,9 +24,6 @@ public class QuestionnaireService {
     private QuestionnaireRepository questionnaireRepository;
 
     @Autowired
-    private QuestionRepository questionRepository;
-
-    @Autowired
     private ReponseUtilisateurQuestionRepository reponseUtilisateurQuestionRepository;
 
     public List<Questionnaire> listAllSurvey() {
@@ -57,6 +54,11 @@ public class QuestionnaireService {
         return new ArrayList<Question>();
     }
 
+    /**
+     * Add answer to a question for a specific survey and user, increase number of attempts and calculate if the answer is right, wrong or not answered
+     * @param questionnaire is a survey (Questionnaire)
+     * @param utilisateur is a user (Utilisateur)
+     */
     public void addAnswer(QuestionnaireBean questionnaire, Utilisateur utilisateur) {
         Optional<Questionnaire> questionnaireBdd = questionnaireRepository.findById(questionnaire.getIdQuestionnaire());
         if (questionnaireBdd.isPresent()){

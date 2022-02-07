@@ -74,3 +74,10 @@ Installez toutes les dépendances nécessaires au projet :
 Lancez le serveur :
 
 ```ng serve```
+
+## Contributeurs
+
+- [Bastien Proudhom](https://github.com/N0rvel)
+- [Baptiste Beaumal](https://github.com/BBeaumal)
+- [Guillaume Bikoko](https://github.com/steevyor)
+

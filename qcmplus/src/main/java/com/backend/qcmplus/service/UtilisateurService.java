@@ -16,4 +16,6 @@ public interface UtilisateurService {
     void deleteUtilisateur(Long id);
 
     Utilisateur getUtilisateurByLogin(String login);
+
+    Utilisateur getCurrentUtilisateur();
 }
