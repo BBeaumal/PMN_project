@@ -161,28 +161,6 @@ public class UserController {
         return parcoursBeanList;
     }
 
-/*    Mono<List<ReponseUtilisateurQuestion>> findAllReponses(@PathVariable Long id) throws UserNotFoundException {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof UserDetails) {
-            String username = ((UserDetails)principal).getUsername();
-            System.out.println("Utilisateur : "+username);
-            Utilisateur tempUser = utilisateurService.getUtilisateurByLogin(username);
-            if ( tempUser == null )
-                System.out.println("User not found with id survey");
-            else{
-                if (tempUser.isIsadmin())
-                    System.out.println("User must not be Admin");
-                else{
-                    System.out.println("Utilisateur : "+tempUser.getIdUtilisateur()+ "  : "+tempUser.getPrenom());
-                    return Mono.just(reponseUtilisateurQuestionService.listAllQuestionsByUtilisateur(tempUser.getIdUtilisateur()));
-                }
-            }
-        } else {
-          throw new UserNotFoundException(id);
-        }
-        return Mono.just(reponseUtilisateurQuestionService.listAllQuestionsByUtilisateur(id));
-    }*/
-
 
     @Transactional
     @PostMapping("/questionnaire/repondre")
