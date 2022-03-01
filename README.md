@@ -71,6 +71,9 @@ Créer un compte administrateur avec le mot de passe suivant prédéfini :
 (isadmin, login, mail, nom, password, prenom, societe, id_utilisateur)
 VALUES(1, 'admin', 'utilisateur@tst.com', 'admin', '$2a$10$kh/kSTzNjeEIQ6F08YH/wO3T/17cJlDWOLZIucwE.phvOLw17XIGC', 'admin', 'LECLIENT', 0);
 `
+Celà correspond aux identifiants suivants dans l'application:
+Identifiant: admin
+Mot de passe: admin
 
 ### 4. Frontend
 
