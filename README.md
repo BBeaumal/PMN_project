@@ -19,7 +19,7 @@ Elle est composée d'un backend en Java et d'un frontend en Angular.
 ## Prérequis nécessaires
 
 - [MySQL](https://dev.mysql.com/downloads/installer/)
-- un IDE (Eclipse, IntelliJ, VS Code, etc...)
+- un IDE (Eclipse, VS Code, etc...)
 - [Git](https://git-scm.com/downloads)
 
 ## Installation
@@ -35,6 +35,10 @@ Rentrer dans le backend en ouvrant un terminal à la racine du projet, puis tape
 `cd qcmplus`
 
 Dans le backend, modifier le fichier [application.properties](qcmplus/src/main/resources/application.properties) avec vos informations personnelles MySQL (username et password).
+
+Faire clique droit sur le répertoire qcmplus; build maven
+![image](https://user-images.githubusercontent.com/34241469/156134303-14402931-97ab-4883-bc91-7704dfd34e84.png)
+
 
 Lancez le backend, en vous plaçant dans la classe suivante [QcmplusApplication](qcmplus/src/main/java/com/backend/qcmplus/QcmplusApplication.java), la base de données va automatiquement être créée.
 
