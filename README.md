@@ -19,27 +19,33 @@ Elle est composée d'un backend en Java et d'un frontend en Angular.
 ## Prérequis nécessaires
 
 - [MySQL](https://dev.mysql.com/downloads/installer/)
-- un IDE (Eclipse, VS Code, etc...)
+- [Intellij Ultimate](https://www.jetbrains.com/fr-fr/idea/download/#section=windows)
 - [Git](https://git-scm.com/downloads)
 - [NodeJS](https://nodejs.org/en/download/)
 
 ## Installation
 
-### 1.  Cloner le repository avec la commande Git Bash suivante :
-
-`git clone https://github.com/N0rvel/PMN_project.git`
 
 ### 2. Backend
 
-Rentrer dans le backend en ouvrant un terminal à la racine du projet, puis tapez :
+Lancez Intellij Ultimate
+Cliquer sur "Get From VSC:
+![image](https://user-images.githubusercontent.com/34241469/156140148-1abc5aee-10b6-46c5-863a-3d539bab6fb0.png)
 
-`cd qcmplus`
+Dans "URL" mettre : https://github.com/N0rvel/PMN_project.git puis cliquer sur "Clone"
+
+Fermez le projet
+![image](https://user-images.githubusercontent.com/34241469/156140722-2c62db6e-db50-40df-8e6a-096ffe060e55.png)
+
+Cliquer sur "Open" et selectionnez le fichier pom.xml du projet cloné 
+![image](https://user-images.githubusercontent.com/34241469/156140963-1527990c-c31e-4188-8463-2a7f365fe326.png)
+
+Cliquez sur "Open as project"; Trust project
+
+Faites clique droit sur le fichier Pom.xml, puis "Maven; Reload project"
+![image](https://user-images.githubusercontent.com/34241469/156141348-4ac5b6eb-fe35-48a2-a3c8-93b47c30c600.png)
 
 Dans le backend, modifier le fichier [application.properties](qcmplus/src/main/resources/application.properties) avec vos informations personnelles MySQL (username et password).
-
-Faire clique droit sur le répertoire qcmplus; maven install
-
-![image](https://user-images.githubusercontent.com/34241469/156135005-d08fb58b-f876-4908-9d7b-688f73d7e586.png)
 
 Passez à l'étape 3
 
@@ -51,7 +57,9 @@ Exécutez le client MySQL Server situé à l'adresse suivante : (ou cherchez MyS
 
 Rentrez votre mot de passe et validez.
 
-Lancez le backend, en vous plaçant dans la classe suivante [QcmplusApplication](qcmplus/src/main/java/com/backend/qcmplus/QcmplusApplication.java), la base de données va automatiquement être créée.
+Lancez le backend, la base de données va automatiquement être créée:
+Cliquez sur la fleche verte en haut ![image](https://user-images.githubusercontent.com/34241469/156142270-30b15db3-c268-46c4-84a3-d10387fac805.png)
+
 
 Sélectionnez la base de données :
 
@@ -61,14 +69,16 @@ Créer un compte administrateur avec le mot de passe suivant prédéfini :
 
 `INSERT INTO qcmplus.utilisateur
 (isadmin, login, mail, nom, password, prenom, societe, id_utilisateur)
-VALUES(1, 'admin', 'utilisateur@tst.com', 'admin', '$10$kh/kSTzNjeEIQ6F08YH/wO3T/17cJlDWOLZIucwE.phvOLw17XIGC', 'admin', 'LECLIENT', 0);
+VALUES(1, 'admin', 'utilisateur@tst.com', 'admin', '$2a$10$kh/kSTzNjeEIQ6F08YH/wO3T/17cJlDWOLZIucwE.phvOLw17XIGC', 'admin', 'LECLIENT', 0);
 `
 
 ### 4. Frontend
 
-Pour rentrer dans le frontend, mettez vous à la racine du projet et tapez la commande suivante dans un terminal :
+Pour rentrer dans le frontend, mettez vous à la racine du projet et tapez la commande suivante dans le terminal d'intellij:
 
-```cd front```
+```cd ../front```
+![image](https://user-images.githubusercontent.com/34241469/156142634-37aaf28c-3f97-4474-bf97-4392857e0284.png)
+
 
 Une fois dans le frontend, installez Angular avec la commande suivante :
 
