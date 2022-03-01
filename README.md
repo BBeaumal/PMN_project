@@ -21,6 +21,7 @@ Elle est composée d'un backend en Java et d'un frontend en Angular.
 - [MySQL](https://dev.mysql.com/downloads/installer/)
 - un IDE (Eclipse, VS Code, etc...)
 - [Git](https://git-scm.com/downloads)
+- [NodeJS](https://nodejs.org/en/download/)
 
 ## Installation
 
