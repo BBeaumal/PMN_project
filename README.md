@@ -36,19 +36,21 @@ Rentrer dans le backend en ouvrant un terminal à la racine du projet, puis tape
 
 Dans le backend, modifier le fichier [application.properties](qcmplus/src/main/resources/application.properties) avec vos informations personnelles MySQL (username et password).
 
-Faire clique droit sur le répertoire qcmplus; build maven
-![image](https://user-images.githubusercontent.com/34241469/156134303-14402931-97ab-4883-bc91-7704dfd34e84.png)
+Faire clique droit sur le répertoire qcmplus; maven install
 
+![image](https://user-images.githubusercontent.com/34241469/156135005-d08fb58b-f876-4908-9d7b-688f73d7e586.png)
 
-Lancez le backend, en vous plaçant dans la classe suivante [QcmplusApplication](qcmplus/src/main/java/com/backend/qcmplus/QcmplusApplication.java), la base de données va automatiquement être créée.
+Passez à l'étape 3
 
 ### 3. Base de données
 
-Exécutez le client MySQL Server situé à l'adresse suivante :
+Exécutez le client MySQL Server situé à l'adresse suivante : (ou cherchez MySql Command Line Client)
 
 `C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe`
 
 Rentrez votre mot de passe et validez.
+
+Lancez le backend, en vous plaçant dans la classe suivante [QcmplusApplication](qcmplus/src/main/java/com/backend/qcmplus/QcmplusApplication.java), la base de données va automatiquement être créée.
 
 Sélectionnez la base de données :
 
@@ -57,8 +59,8 @@ Sélectionnez la base de données :
 Créer un compte administrateur avec le mot de passe suivant prédéfini :
 
 `INSERT INTO qcmplus.utilisateur
-(isadmin, login, mail, nom, password, prenom, societe)
-VALUES(1, 'admin', 'utilisateur@tst.com', 'admin', '$10$kh/kSTzNjeEIQ6F08YH/wO3T/17cJlDWOLZIucwE.phvOLw17XIGC', 'admin', 'LECLIENT');
+(isadmin, login, mail, nom, password, prenom, societe, id_utilisateur)
+VALUES(1, 'admin', 'utilisateur@tst.com', 'admin', '$10$kh/kSTzNjeEIQ6F08YH/wO3T/17cJlDWOLZIucwE.phvOLw17XIGC', 'admin', 'LECLIENT', 0);
 `
 
 ### 4. Frontend
